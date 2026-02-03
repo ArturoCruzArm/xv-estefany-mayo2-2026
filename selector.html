@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Selector de Fotos - XV Años 20 Junio 2026</title>
+    <link rel="icon" type="image/svg+xml" href="favicon.svg">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Montserrat:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --primary-pink: #e91e63;
+            --primary-purple: #9c27b0;
+            --accent-light: #f48fb1;
+            --accent-white: #ffffff;
+            --text-primary: #333333;
+            --cream: #faf8f3;
+        }
+
+        body {
+            font-family: 'Montserrat', sans-serif;
+            background: linear-gradient(135deg, var(--primary-pink) 0%, var(--primary-purple) 100%);
+            color: var(--cream);
+            min-height: 100vh;
+            user-select: none;
+        }
+
+        .container {
+            max-width: 1600px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        .header {
+            text-align: center;
+            padding: 40px 20px;
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(10px);
+            margin-bottom: 30px;
+        }
+
+        .main-title {
+            font-family: 'Great Vibes', cursive;
+            font-size: clamp(2rem, 6vw, 3.5rem);
+            color: var(--accent-white);
+            margin-bottom: 10px;
+        }
+
+        .subtitle {
+            font-family: 'Montserrat', sans-serif;
+            font-size: clamp(1.5rem, 4vw, 2rem);
+            color: var(--cream);
+            margin-bottom: 20px;
+            font-weight: 300;
+        }
+
+        .instructions {
+            color: var(--cream);
+            font-size: 1rem;
+            max-width: 1000px;
+            margin: 0 auto;
+            line-height: 1.8;
+        }
+
+        .pending-message {
+            background: rgba(255, 255, 255, 0.1);
+            padding: 3rem;
+            border-radius: 20px;
+            text-align: center;
+            margin: 2rem auto;
+            max-width: 800px;
+        }
+
+        .pending-message h2 {
+            font-family: 'Great Vibes', cursive;
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .pending-message p {
+            font-size: 1.1rem;
+            line-height: 1.8;
+            margin-bottom: 1rem;
+        }
+
+        .pending-icon {
+            font-size: 5rem;
+            margin-bottom: 1rem;
+            opacity: 0.8;
+        }
+
+        .nav-links {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            margin: 30px 0;
+            flex-wrap: wrap;
+        }
+
+        .nav-links a {
+            display: inline-block;
+            background: rgba(255, 255, 255, 0.2);
+            color: white;
+            padding: 12px 30px;
+            border-radius: 30px;
+            text-decoration: none;
+            transition: all 0.3s;
+            font-weight: 600;
+        }
+
+        .nav-links a:hover {
+            background: rgba(255, 255, 255, 0.3);
+            transform: translateY(-3px);
+        }
+
+        .footer {
+            text-align: center;
+            padding: 40px 20px;
+            color: var(--cream);
+            background: rgba(0, 0, 0, 0.3);
+            margin-top: 40px;
+        }
+    </style>
+</head>
+<body>
+    <header class="header">
+        <h1 class="main-title">Selector de Fotos</h1>
+        <p class="subtitle">XV Años - 20 de Junio, 2026</p>
+
+        <div class="nav-links">
+            <a href="index.html">Invitación</a>
+            <a href="contrato.html">Contrato</a>
+            <a href="logistica.html">Logística</a>
+            <a href="selector.html">Selector</a>
+        </div>
+    </header>
+
+    <div class="container">
+        <div class="pending-message">
+            <div class="pending-icon">📸</div>
+            <h2>Próximamente</h2>
+            <p>El selector de fotos estará disponible una vez que se realice la sesión fotográfica.</p>
+            <p>Aquí podrás seleccionar las <strong>50 fotos</strong> que deseas imprimir en tamaño 5x7".</p>
+            <p style="margin-top: 2rem; opacity: 0.8;">
+                <i class="fas fa-info-circle"></i>
+                Te notificaremos cuando las fotos estén listas para seleccionar.
+            </p>
+        </div>
+    </div>
+
+    <footer class="footer">
+        <p><strong>XV Años</strong> - 20 de Junio de 2026</p>
+        <p>León, Guanajuato</p>
+        <p style="margin-top: 1rem; opacity: 0.8;">Producciones Foro 7 | 477-920-3776</p>
+    </footer>
+</body>
+</html>

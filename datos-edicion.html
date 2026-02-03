@@ -1,0 +1,820 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Datos para Edición - XV Años</title>
+    <link rel="icon" type="image/svg+xml" href="favicon.svg">
+    <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Montserrat:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Montserrat', sans-serif;
+            background: linear-gradient(135deg, #fce4ec 0%, #f3e5f5 100%);
+            color: #333;
+            min-height: 100vh;
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+
+        .header {
+            background: linear-gradient(135deg, #e91e63 0%, #9c27b0 100%);
+            color: white;
+            padding: 2rem;
+            text-align: center;
+            border-radius: 20px 20px 0 0;
+        }
+
+        .header h1 {
+            font-family: 'Great Vibes', cursive;
+            font-size: 2.5rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .nav-links {
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+            margin: 15px 0;
+            flex-wrap: wrap;
+        }
+
+        .nav-links a {
+            background: rgba(255, 255, 255, 0.2);
+            color: white;
+            padding: 8px 20px;
+            border-radius: 20px;
+            text-decoration: none;
+            font-size: 0.9rem;
+            font-weight: 600;
+        }
+
+        .content {
+            background: white;
+            padding: 2rem;
+            border-radius: 0 0 20px 20px;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.1);
+        }
+
+        .intro {
+            background: #e3f2fd;
+            padding: 1rem 1.5rem;
+            border-radius: 10px;
+            margin-bottom: 2rem;
+            border-left: 4px solid #2196f3;
+        }
+
+        .form-section {
+            margin-bottom: 2rem;
+            padding-bottom: 1.5rem;
+            border-bottom: 2px solid #f3e5f5;
+        }
+
+        .form-section:last-of-type {
+            border-bottom: none;
+        }
+
+        .section-title {
+            font-size: 1.3rem;
+            color: #e91e63;
+            margin-bottom: 1rem;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .form-group {
+            margin-bottom: 1rem;
+        }
+
+        label {
+            display: block;
+            font-weight: 600;
+            color: #9c27b0;
+            margin-bottom: 0.5rem;
+            font-size: 0.95rem;
+        }
+
+        input, select, textarea {
+            width: 100%;
+            padding: 12px 15px;
+            border: 2px solid #e0e0e0;
+            border-radius: 10px;
+            font-size: 1rem;
+            font-family: 'Montserrat', sans-serif;
+            transition: all 0.3s;
+        }
+
+        input:focus, select:focus, textarea:focus {
+            outline: none;
+            border-color: #e91e63;
+            box-shadow: 0 0 0 3px rgba(233, 30, 99, 0.1);
+        }
+
+        .grid-2 {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1rem;
+        }
+
+        .dynamic-section {
+            background: #fce4ec;
+            padding: 1.5rem;
+            border-radius: 15px;
+            margin-top: 1rem;
+        }
+
+        .dynamic-item {
+            background: white;
+            padding: 1rem;
+            border-radius: 10px;
+            margin-bottom: 0.75rem;
+            display: flex;
+            gap: 10px;
+            align-items: center;
+        }
+
+        .dynamic-item input {
+            flex: 1;
+        }
+
+        .btn {
+            padding: 12px 25px;
+            border: none;
+            border-radius: 25px;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .btn-add {
+            background: #9c27b0;
+            color: white;
+            margin-top: 0.5rem;
+        }
+
+        .btn-add:hover {
+            background: #7b1fa2;
+        }
+
+        .btn-remove {
+            background: #f44336;
+            color: white;
+            padding: 8px 15px;
+            font-size: 0.9rem;
+        }
+
+        .btn-remove:hover {
+            background: #d32f2f;
+        }
+
+        .btn-send {
+            background: linear-gradient(135deg, #25d366 0%, #128c7e 100%);
+            color: white;
+            width: 100%;
+            padding: 18px;
+            font-size: 1.2rem;
+            margin-top: 1rem;
+        }
+
+        .btn-send:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 20px rgba(37, 211, 102, 0.4);
+        }
+
+        .madrina-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 0.75rem;
+        }
+
+        .madrina-item {
+            background: #f3e5f5;
+            padding: 0.75rem 1rem;
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .madrina-item label {
+            flex-shrink: 0;
+            width: 140px;
+            margin-bottom: 0;
+            font-size: 0.85rem;
+        }
+
+        .madrina-item input {
+            flex: 1;
+            padding: 8px 12px;
+        }
+
+        .familiar-item {
+            background: white;
+            padding: 1rem;
+            border-radius: 10px;
+            margin-bottom: 0.75rem;
+        }
+
+        .familiar-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr auto;
+            gap: 10px;
+            align-items: end;
+        }
+
+        .preview-box {
+            background: #f5f5f5;
+            padding: 1.5rem;
+            border-radius: 10px;
+            margin-top: 2rem;
+            display: none;
+        }
+
+        .preview-box.show {
+            display: block;
+        }
+
+        .preview-box pre {
+            white-space: pre-wrap;
+            font-size: 0.85rem;
+            background: white;
+            padding: 1rem;
+            border-radius: 8px;
+            max-height: 300px;
+            overflow-y: auto;
+        }
+
+        .footer {
+            text-align: center;
+            padding: 2rem;
+            color: #666;
+        }
+
+        @media (max-width: 768px) {
+            .container {
+                padding: 1rem;
+            }
+            .familiar-row {
+                grid-template-columns: 1fr;
+            }
+            .madrina-item {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+            .madrina-item label {
+                width: 100%;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>Datos para Edición</h1>
+            <p>Información para tu video de XV años</p>
+            <div class="nav-links">
+                <a href="index.html">Invitación</a>
+                <a href="logistica.html">Logística</a>
+                <a href="preparativos.html">Preparativos</a>
+                <a href="datos-edicion.html">Datos Video</a>
+            </div>
+        </div>
+
+        <div class="content">
+            <div class="intro">
+                <strong>¿Para qué es esto?</strong>
+                <p style="margin-top: 0.5rem;">Estos datos aparecerán en los títulos de tu video. Llena solo los campos que apliquen para tu evento.</p>
+            </div>
+
+            <form id="dataForm">
+                <!-- QUINCEAÑERA -->
+                <div class="form-section">
+                    <h2 class="section-title">👑 La Quinceañera</h2>
+                    <div class="form-group">
+                        <label>Nombre completo de la quinceañera *</label>
+                        <input type="text" id="nombreQuinceanera" placeholder="Ej: María Fernanda López García" required>
+                    </div>
+                    <div class="form-group">
+                        <label>Fecha de nacimiento</label>
+                        <input type="date" id="fechaNacimiento">
+                    </div>
+                </div>
+
+                <!-- PADRES -->
+                <div class="form-section">
+                    <h2 class="section-title">👨‍👩‍👧 Padres</h2>
+                    <div class="grid-2">
+                        <div class="form-group">
+                            <label>Nombre del papá</label>
+                            <input type="text" id="nombrePapa" placeholder="Nombre completo">
+                        </div>
+                        <div class="form-group">
+                            <label>Nombre de la mamá</label>
+                            <input type="text" id="nombreMama" placeholder="Nombre completo">
+                        </div>
+                    </div>
+                </div>
+
+                <!-- PADRINOS -->
+                <div class="form-section">
+                    <h2 class="section-title">🤝 Padrinos de Honor</h2>
+                    <p style="color: #666; margin-bottom: 1rem; font-size: 0.9rem;">Los padrinos principales de la quinceañera</p>
+                    <div class="grid-2">
+                        <div class="form-group">
+                            <label>Padrino</label>
+                            <input type="text" id="padrino" placeholder="Nombre completo">
+                        </div>
+                        <div class="form-group">
+                            <label>Madrina</label>
+                            <input type="text" id="madrina" placeholder="Nombre completo">
+                        </div>
+                    </div>
+                </div>
+
+                <!-- MADRINAS DE CEREMONIA -->
+                <div class="form-section">
+                    <h2 class="section-title">🎀 Madrinas de Ceremonia</h2>
+                    <p style="color: #666; margin-bottom: 1rem; font-size: 0.9rem;">Llena solo las que apliquen para tu evento</p>
+
+                    <div class="madrina-grid">
+                        <div class="madrina-item">
+                            <label>👗 Vestido:</label>
+                            <input type="text" id="madrinaVestido" placeholder="Nombre">
+                        </div>
+                        <div class="madrina-item">
+                            <label>👠 Zapatillas:</label>
+                            <input type="text" id="madrinaZapatillas" placeholder="Nombre">
+                        </div>
+                        <div class="madrina-item">
+                            <label>👑 Corona:</label>
+                            <input type="text" id="madrinaCorona" placeholder="Nombre">
+                        </div>
+                        <div class="madrina-item">
+                            <label>💍 Anillo:</label>
+                            <input type="text" id="madrinaAnillo" placeholder="Nombre">
+                        </div>
+                        <div class="madrina-item">
+                            <label>💐 Ramo:</label>
+                            <input type="text" id="madrinaRamo" placeholder="Nombre">
+                        </div>
+                        <div class="madrina-item">
+                            <label>🪆 Última muñeca:</label>
+                            <input type="text" id="madrinaMuneca" placeholder="Nombre">
+                        </div>
+                        <div class="madrina-item">
+                            <label>📖 Biblia/Misal:</label>
+                            <input type="text" id="madrinaBiblia" placeholder="Nombre">
+                        </div>
+                        <div class="madrina-item">
+                            <label>📿 Rosario:</label>
+                            <input type="text" id="madrinaRosario" placeholder="Nombre">
+                        </div>
+                        <div class="madrina-item">
+                            <label>🛋️ Cojín:</label>
+                            <input type="text" id="madrinaCojin" placeholder="Nombre">
+                        </div>
+                        <div class="madrina-item">
+                            <label>💄 Maquillaje:</label>
+                            <input type="text" id="madrinaMaquillaje" placeholder="Nombre">
+                        </div>
+                        <div class="madrina-item">
+                            <label>💇‍♀️ Peinado:</label>
+                            <input type="text" id="madrinaPeinado" placeholder="Nombre">
+                        </div>
+                        <div class="madrina-item">
+                            <label>💅 Uñas:</label>
+                            <input type="text" id="madrinaUnas" placeholder="Nombre">
+                        </div>
+                        <div class="madrina-item">
+                            <label>👂 Aretes:</label>
+                            <input type="text" id="madrinaAretes" placeholder="Nombre">
+                        </div>
+                        <div class="madrina-item">
+                            <label>📿 Collar:</label>
+                            <input type="text" id="madrinaCollar" placeholder="Nombre">
+                        </div>
+                        <div class="madrina-item">
+                            <label>⌚ Pulsera:</label>
+                            <input type="text" id="madrinaPulsera" placeholder="Nombre">
+                        </div>
+                        <div class="madrina-item">
+                            <label>🎂 Pastel:</label>
+                            <input type="text" id="madrinaPastel" placeholder="Nombre">
+                        </div>
+                        <div class="madrina-item">
+                            <label>🥂 Brindis:</label>
+                            <input type="text" id="madrinaBrindis" placeholder="Nombre">
+                        </div>
+                        <div class="madrina-item">
+                            <label>💃 Vals:</label>
+                            <input type="text" id="madrinaVals" placeholder="Nombre">
+                        </div>
+                        <div class="madrina-item">
+                            <label>🎁 Recuerdos:</label>
+                            <input type="text" id="madrinaRecuerdos" placeholder="Nombre">
+                        </div>
+                        <div class="madrina-item">
+                            <label>🌸 Centros mesa:</label>
+                            <input type="text" id="madrinaCentros" placeholder="Nombre">
+                        </div>
+                        <div class="madrina-item">
+                            <label>💌 Invitaciones:</label>
+                            <input type="text" id="madrinaInvitaciones" placeholder="Nombre">
+                        </div>
+                        <div class="madrina-item">
+                            <label>📸 Foto/Video:</label>
+                            <input type="text" id="madrinaFotoVideo" placeholder="Nombre">
+                        </div>
+                        <div class="madrina-item">
+                            <label>🎵 DJ/Música:</label>
+                            <input type="text" id="madrinaMusica" placeholder="Nombre">
+                        </div>
+                        <div class="madrina-item">
+                            <label>🎨 Decoración:</label>
+                            <input type="text" id="madrinaDecoracion" placeholder="Nombre">
+                        </div>
+                    </div>
+                </div>
+
+                <!-- CHAMBELANES -->
+                <div class="form-section">
+                    <h2 class="section-title">🤵 Chambelanes</h2>
+                    <div class="form-group">
+                        <label>¿Cuántos chambelanes tendrás?</label>
+                        <select id="numChambelanes" onchange="updateChambelanes()">
+                            <option value="0">Sin chambelanes</option>
+                            <option value="1">1 chambelán</option>
+                            <option value="2">2 chambelanes</option>
+                            <option value="3">3 chambelanes</option>
+                            <option value="4">4 chambelanes</option>
+                            <option value="5">5 chambelanes</option>
+                            <option value="6">6 chambelanes</option>
+                            <option value="7">7 chambelanes</option>
+                            <option value="8">8 chambelanes</option>
+                            <option value="14">14 chambelanes</option>
+                            <option value="15">15 chambelanes</option>
+                        </select>
+                    </div>
+                    <div class="dynamic-section" id="chambelanesContainer" style="display: none;">
+                        <p style="margin-bottom: 1rem; font-weight: 600; color: #9c27b0;">Nombres de chambelanes:</p>
+                        <div id="chambelanesList"></div>
+                    </div>
+                </div>
+
+                <!-- DAMAS -->
+                <div class="form-section">
+                    <h2 class="section-title">👗 Damas</h2>
+                    <div class="form-group">
+                        <label>¿Cuántas damas tendrás?</label>
+                        <select id="numDamas" onchange="updateDamas()">
+                            <option value="0">Sin damas</option>
+                            <option value="1">1 dama</option>
+                            <option value="2">2 damas</option>
+                            <option value="3">3 damas</option>
+                            <option value="4">4 damas</option>
+                            <option value="5">5 damas</option>
+                            <option value="6">6 damas</option>
+                            <option value="7">7 damas</option>
+                            <option value="14">14 damas</option>
+                            <option value="15">15 damas</option>
+                        </select>
+                    </div>
+                    <div class="dynamic-section" id="damasContainer" style="display: none;">
+                        <p style="margin-bottom: 1rem; font-weight: 600; color: #9c27b0;">Nombres de damas:</p>
+                        <div id="damasList"></div>
+                    </div>
+                </div>
+
+                <!-- FAMILIARES ADICIONALES -->
+                <div class="form-section">
+                    <h2 class="section-title">👨‍👩‍👧‍👦 Familiares Especiales</h2>
+                    <p style="color: #666; margin-bottom: 1rem; font-size: 0.9rem;">Agrega abuelitas, tíos, primos u otros familiares que quieras mencionar en el video</p>
+
+                    <div id="familiaresContainer"></div>
+                    <button type="button" class="btn btn-add" onclick="addFamiliar()">
+                        + Agregar familiar
+                    </button>
+                </div>
+
+                <!-- MENSAJE ESPECIAL -->
+                <div class="form-section">
+                    <h2 class="section-title">💝 Mensaje Especial</h2>
+                    <div class="form-group">
+                        <label>Mensaje o dedicatoria para incluir en el video (opcional)</label>
+                        <textarea id="mensajeEspecial" rows="4" placeholder="Ej: Gracias a mi familia por hacer este sueño realidad..."></textarea>
+                    </div>
+                </div>
+
+                <!-- BOTÓN ENVIAR -->
+                <button type="button" class="btn btn-send" onclick="enviarDatos()">
+                    📱 Enviar datos por WhatsApp
+                </button>
+
+                <!-- PREVIEW -->
+                <div class="preview-box" id="previewBox">
+                    <h3 style="margin-bottom: 1rem;">Vista previa de datos:</h3>
+                    <pre id="previewContent"></pre>
+                </div>
+            </form>
+        </div>
+
+        <div class="footer">
+            <p>Foro 7 Producciones | WhatsApp: 477-920-3776</p>
+        </div>
+    </div>
+
+    <script>
+        function updateChambelanes() {
+            const num = parseInt(document.getElementById('numChambelanes').value);
+            const container = document.getElementById('chambelanesContainer');
+            const list = document.getElementById('chambelanesList');
+
+            if (num === 0) {
+                container.style.display = 'none';
+                list.innerHTML = '';
+                return;
+            }
+
+            container.style.display = 'block';
+            list.innerHTML = '';
+
+            for (let i = 1; i <= num; i++) {
+                const div = document.createElement('div');
+                div.className = 'dynamic-item';
+                div.innerHTML = `
+                    <span style="font-weight: 600; color: #9c27b0; width: 30px;">${i}.</span>
+                    <input type="text" id="chambelan${i}" placeholder="Nombre del chambelán ${i}">
+                `;
+                list.appendChild(div);
+            }
+        }
+
+        function updateDamas() {
+            const num = parseInt(document.getElementById('numDamas').value);
+            const container = document.getElementById('damasContainer');
+            const list = document.getElementById('damasList');
+
+            if (num === 0) {
+                container.style.display = 'none';
+                list.innerHTML = '';
+                return;
+            }
+
+            container.style.display = 'block';
+            list.innerHTML = '';
+
+            for (let i = 1; i <= num; i++) {
+                const div = document.createElement('div');
+                div.className = 'dynamic-item';
+                div.innerHTML = `
+                    <span style="font-weight: 600; color: #9c27b0; width: 30px;">${i}.</span>
+                    <input type="text" id="dama${i}" placeholder="Nombre de la dama ${i}">
+                `;
+                list.appendChild(div);
+            }
+        }
+
+        let familiarCount = 0;
+        function addFamiliar() {
+            familiarCount++;
+            const container = document.getElementById('familiaresContainer');
+            const div = document.createElement('div');
+            div.className = 'familiar-item';
+            div.id = 'familiar' + familiarCount;
+            div.innerHTML = `
+                <div class="familiar-row">
+                    <div class="form-group" style="margin-bottom: 0;">
+                        <label style="font-size: 0.85rem;">Parentesco</label>
+                        <select id="parentesco${familiarCount}">
+                            <option value="Abuelita">Abuelita</option>
+                            <option value="Abuelito">Abuelito</option>
+                            <option value="Tía">Tía</option>
+                            <option value="Tío">Tío</option>
+                            <option value="Prima">Prima</option>
+                            <option value="Primo">Primo</option>
+                            <option value="Hermana">Hermana</option>
+                            <option value="Hermano">Hermano</option>
+                            <option value="Madrina especial">Madrina especial</option>
+                            <option value="Padrino especial">Padrino especial</option>
+                            <option value="Amiga especial">Amiga especial</option>
+                            <option value="Otro">Otro</option>
+                        </select>
+                    </div>
+                    <div class="form-group" style="margin-bottom: 0;">
+                        <label style="font-size: 0.85rem;">Nombre</label>
+                        <input type="text" id="familiarNombre${familiarCount}" placeholder="Nombre completo">
+                    </div>
+                    <button type="button" class="btn btn-remove" onclick="removeFamiliar(${familiarCount})">✕</button>
+                </div>
+            `;
+            container.appendChild(div);
+        }
+
+        function removeFamiliar(id) {
+            const element = document.getElementById('familiar' + id);
+            if (element) {
+                element.remove();
+            }
+        }
+
+        function recolectarDatos() {
+            const datos = {
+                evento: "XV Años - 20 de Junio 2026",
+                quinceañera: {
+                    nombre: document.getElementById('nombreQuinceanera').value || '',
+                    fechaNacimiento: document.getElementById('fechaNacimiento').value || ''
+                },
+                padres: {
+                    papa: document.getElementById('nombrePapa').value || '',
+                    mama: document.getElementById('nombreMama').value || ''
+                },
+                padrinosHonor: {
+                    padrino: document.getElementById('padrino').value || '',
+                    madrina: document.getElementById('madrina').value || ''
+                },
+                madrinas: {},
+                chambelanes: [],
+                damas: [],
+                familiares: [],
+                mensajeEspecial: document.getElementById('mensajeEspecial').value || ''
+            };
+
+            // Recolectar madrinas
+            const madrinasIds = [
+                'madrinaVestido', 'madrinaZapatillas', 'madrinaCorona', 'madrinaAnillo',
+                'madrinaRamo', 'madrinaMuneca', 'madrinaBiblia', 'madrinaRosario',
+                'madrinaCojin', 'madrinaMaquillaje', 'madrinaPeinado', 'madrinaUnas',
+                'madrinaAretes', 'madrinaCollar', 'madrinaPulsera', 'madrinaPastel',
+                'madrinaBrindis', 'madrinaVals', 'madrinaRecuerdos', 'madrinaCentros',
+                'madrinaInvitaciones', 'madrinaFotoVideo', 'madrinaMusica', 'madrinaDecoracion'
+            ];
+
+            const madrinasLabels = {
+                'madrinaVestido': 'Vestido',
+                'madrinaZapatillas': 'Zapatillas',
+                'madrinaCorona': 'Corona',
+                'madrinaAnillo': 'Anillo',
+                'madrinaRamo': 'Ramo',
+                'madrinaMuneca': 'Última muñeca',
+                'madrinaBiblia': 'Biblia/Misal',
+                'madrinaRosario': 'Rosario',
+                'madrinaCojin': 'Cojín',
+                'madrinaMaquillaje': 'Maquillaje',
+                'madrinaPeinado': 'Peinado',
+                'madrinaUnas': 'Uñas',
+                'madrinaAretes': 'Aretes',
+                'madrinaCollar': 'Collar',
+                'madrinaPulsera': 'Pulsera',
+                'madrinaPastel': 'Pastel',
+                'madrinaBrindis': 'Brindis',
+                'madrinaVals': 'Vals',
+                'madrinaRecuerdos': 'Recuerdos',
+                'madrinaCentros': 'Centros de mesa',
+                'madrinaInvitaciones': 'Invitaciones',
+                'madrinaFotoVideo': 'Foto/Video',
+                'madrinaMusica': 'DJ/Música',
+                'madrinaDecoracion': 'Decoración'
+            };
+
+            madrinasIds.forEach(id => {
+                const value = document.getElementById(id).value;
+                if (value) {
+                    datos.madrinas[madrinasLabels[id]] = value;
+                }
+            });
+
+            // Recolectar chambelanes
+            const numChambelanes = parseInt(document.getElementById('numChambelanes').value);
+            for (let i = 1; i <= numChambelanes; i++) {
+                const input = document.getElementById('chambelan' + i);
+                if (input && input.value) {
+                    datos.chambelanes.push(input.value);
+                }
+            }
+
+            // Recolectar damas
+            const numDamas = parseInt(document.getElementById('numDamas').value);
+            for (let i = 1; i <= numDamas; i++) {
+                const input = document.getElementById('dama' + i);
+                if (input && input.value) {
+                    datos.damas.push(input.value);
+                }
+            }
+
+            // Recolectar familiares
+            for (let i = 1; i <= familiarCount; i++) {
+                const parentescoEl = document.getElementById('parentesco' + i);
+                const nombreEl = document.getElementById('familiarNombre' + i);
+                if (parentescoEl && nombreEl && nombreEl.value) {
+                    datos.familiares.push({
+                        parentesco: parentescoEl.value,
+                        nombre: nombreEl.value
+                    });
+                }
+            }
+
+            return datos;
+        }
+
+        function formatearMensaje(datos) {
+            let msg = `📹 *DATOS PARA EDICIÓN DE VIDEO*\n`;
+            msg += `━━━━━━━━━━━━━━━━━━━━━━\n\n`;
+
+            msg += `🎀 *EVENTO:* ${datos.evento}\n\n`;
+
+            msg += `👑 *QUINCEAÑERA*\n`;
+            msg += `   Nombre: ${datos.quinceañera.nombre || '(No especificado)'}\n`;
+            if (datos.quinceañera.fechaNacimiento) {
+                msg += `   Fecha nacimiento: ${datos.quinceañera.fechaNacimiento}\n`;
+            }
+            msg += `\n`;
+
+            if (datos.padres.papa || datos.padres.mama) {
+                msg += `👨‍👩‍👧 *PADRES*\n`;
+                if (datos.padres.papa) msg += `   Papá: ${datos.padres.papa}\n`;
+                if (datos.padres.mama) msg += `   Mamá: ${datos.padres.mama}\n`;
+                msg += `\n`;
+            }
+
+            if (datos.padrinosHonor.padrino || datos.padrinosHonor.madrina) {
+                msg += `🤝 *PADRINOS DE HONOR*\n`;
+                if (datos.padrinosHonor.padrino) msg += `   Padrino: ${datos.padrinosHonor.padrino}\n`;
+                if (datos.padrinosHonor.madrina) msg += `   Madrina: ${datos.padrinosHonor.madrina}\n`;
+                msg += `\n`;
+            }
+
+            if (Object.keys(datos.madrinas).length > 0) {
+                msg += `🎀 *MADRINAS*\n`;
+                for (const [tipo, nombre] of Object.entries(datos.madrinas)) {
+                    msg += `   ${tipo}: ${nombre}\n`;
+                }
+                msg += `\n`;
+            }
+
+            if (datos.chambelanes.length > 0) {
+                msg += `🤵 *CHAMBELANES* (${datos.chambelanes.length})\n`;
+                datos.chambelanes.forEach((nombre, i) => {
+                    msg += `   ${i + 1}. ${nombre}\n`;
+                });
+                msg += `\n`;
+            }
+
+            if (datos.damas.length > 0) {
+                msg += `👗 *DAMAS* (${datos.damas.length})\n`;
+                datos.damas.forEach((nombre, i) => {
+                    msg += `   ${i + 1}. ${nombre}\n`;
+                });
+                msg += `\n`;
+            }
+
+            if (datos.familiares.length > 0) {
+                msg += `👨‍👩‍👧‍👦 *FAMILIARES ESPECIALES*\n`;
+                datos.familiares.forEach(fam => {
+                    msg += `   ${fam.parentesco}: ${fam.nombre}\n`;
+                });
+                msg += `\n`;
+            }
+
+            if (datos.mensajeEspecial) {
+                msg += `💝 *MENSAJE ESPECIAL*\n`;
+                msg += `   "${datos.mensajeEspecial}"\n\n`;
+            }
+
+            msg += `━━━━━━━━━━━━━━━━━━━━━━\n`;
+            msg += `Enviado desde: datos-edicion.html`;
+
+            return msg;
+        }
+
+        function enviarDatos() {
+            const nombreQuinceanera = document.getElementById('nombreQuinceanera').value;
+            if (!nombreQuinceanera) {
+                alert('Por favor ingresa al menos el nombre de la quinceañera');
+                return;
+            }
+
+            const datos = recolectarDatos();
+            const mensaje = formatearMensaje(datos);
+
+            // Mostrar preview
+            document.getElementById('previewBox').classList.add('show');
+            document.getElementById('previewContent').textContent = mensaje;
+
+            // Enviar a WhatsApp
+            const whatsappURL = `https://wa.me/5214779203776?text=${encodeURIComponent(mensaje)}`;
+            window.open(whatsappURL, '_blank');
+        }
+    </script>
+</body>
+</html>

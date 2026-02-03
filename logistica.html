@@ -1,0 +1,417 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Logística - XV Años 2 Mayo 2026</title>
+    <link rel="icon" type="image/svg+xml" href="favicon.svg">
+    <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Montserrat:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Montserrat', sans-serif;
+            background: linear-gradient(135deg, #fce4ec 0%, #f3e5f5 100%);
+            color: #333;
+            padding: 2rem;
+        }
+
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 20px;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.1);
+            overflow: hidden;
+        }
+
+        .header {
+            background: linear-gradient(135deg, #e91e63 0%, #9c27b0 100%);
+            color: white;
+            padding: 2.5rem 2rem;
+            text-align: center;
+        }
+
+        .header h1 {
+            font-family: 'Great Vibes', cursive;
+            font-size: 2.5rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .header p {
+            font-size: 1.1rem;
+            opacity: 0.9;
+        }
+
+        .nav-links {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            margin: 20px 0;
+            flex-wrap: wrap;
+        }
+
+        .nav-links a {
+            display: inline-block;
+            background: rgba(255, 255, 255, 0.2);
+            color: white;
+            padding: 10px 25px;
+            border-radius: 25px;
+            text-decoration: none;
+            transition: all 0.3s;
+            font-weight: 600;
+        }
+
+        .nav-links a:hover {
+            background: rgba(255, 255, 255, 0.3);
+            transform: translateY(-2px);
+        }
+
+        .content {
+            padding: 2.5rem 2rem;
+        }
+
+        .section {
+            margin-bottom: 2.5rem;
+        }
+
+        .section-title {
+            font-size: 1.5rem;
+            color: #e91e63;
+            margin-bottom: 1.5rem;
+            padding-bottom: 0.5rem;
+            border-bottom: 3px solid #e91e63;
+        }
+
+        .info-card {
+            background: linear-gradient(135deg, #fce4ec 0%, #f3e5f5 100%);
+            padding: 1.5rem;
+            border-radius: 15px;
+            margin-bottom: 1rem;
+        }
+
+        .info-card h3 {
+            color: #9c27b0;
+            margin-bottom: 0.75rem;
+            font-size: 1.2rem;
+        }
+
+        .info-card p {
+            margin-bottom: 0.4rem;
+            line-height: 1.5;
+        }
+
+        .info-card a {
+            color: #e91e63;
+            font-weight: 600;
+        }
+
+        .grid-2 {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 1.5rem;
+        }
+
+        .timeline {
+            position: relative;
+            padding-left: 2rem;
+        }
+
+        .timeline:before {
+            content: "";
+            position: absolute;
+            left: 0;
+            top: 0;
+            bottom: 0;
+            width: 3px;
+            background: linear-gradient(180deg, #e91e63 0%, #9c27b0 100%);
+        }
+
+        .timeline-item {
+            position: relative;
+            margin-bottom: 1.5rem;
+            padding-left: 1.5rem;
+        }
+
+        .timeline-item:before {
+            content: "";
+            position: absolute;
+            left: -2.5rem;
+            top: 5px;
+            width: 16px;
+            height: 16px;
+            border-radius: 50%;
+            background: white;
+            border: 3px solid #e91e63;
+        }
+
+        .timeline-item.done:before {
+            background: #10b981;
+            border-color: #10b981;
+        }
+
+        .status-done {
+            color: #10b981;
+            font-weight: 600;
+        }
+
+        .status-pending {
+            color: #f59e0b;
+            font-weight: 600;
+        }
+
+        .checklist {
+            list-style: none;
+        }
+
+        .checklist li {
+            padding: 1rem;
+            margin-bottom: 0.75rem;
+            background: #fce4ec;
+            border-left: 4px solid #e91e63;
+            border-radius: 8px;
+            display: flex;
+            align-items: flex-start;
+            gap: 12px;
+        }
+
+        .checklist li .icon {
+            font-size: 1.5rem;
+            flex-shrink: 0;
+        }
+
+        .checklist li .text strong {
+            color: #9c27b0;
+        }
+
+        .price-box {
+            background: linear-gradient(135deg, #e91e63 0%, #9c27b0 100%);
+            color: white;
+            padding: 2rem;
+            border-radius: 15px;
+            text-align: center;
+        }
+
+        .price-box .total {
+            font-size: 2.5rem;
+            font-weight: 700;
+        }
+
+        .price-box .detail {
+            margin-top: 1rem;
+            opacity: 0.9;
+        }
+
+        .contact-box {
+            background: linear-gradient(135deg, #e91e63 0%, #9c27b0 100%);
+            color: white;
+            padding: 2rem;
+            border-radius: 15px;
+            text-align: center;
+        }
+
+        .contact-box a {
+            color: white;
+            text-decoration: underline;
+        }
+
+        .note-box {
+            background: #fff3cd;
+            border-left: 4px solid #f59e0b;
+            padding: 1rem 1.5rem;
+            border-radius: 8px;
+            margin-top: 1rem;
+        }
+
+        .note-box strong {
+            color: #92400e;
+        }
+
+        @media (max-width: 768px) {
+            body {
+                padding: 1rem;
+            }
+            .content {
+                padding: 1.5rem;
+            }
+            .header h1 {
+                font-size: 2rem;
+            }
+        }
+
+        @media print {
+            .nav-links {
+                display: none !important;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>Logística del Evento</h1>
+            <p>XV Años Estefany - Sábado 2 de Mayo, 2026</p>
+
+            <div class="nav-links">
+                <a href="index.html">Invitación</a>
+                <a href="contrato.html">Contrato</a>
+                <a href="logistica.html">Logística</a>
+                <a href="preparativos.html">Preparativos</a>
+                <a href="datos-edicion.html">Datos Video</a>
+            </div>
+        </div>
+
+        <div class="content">
+            <!-- Información del Evento -->
+            <section class="section">
+                <h2 class="section-title">📅 Información del Evento</h2>
+                <div class="grid-2">
+                    <div class="info-card">
+                        <h3>⛪ Ceremonia Religiosa</h3>
+                        <p><strong>Hora:</strong> 5:00 PM</p>
+                        <p><strong>Lugar:</strong> Por confirmar</p>
+                        <p><strong>Dirección:</strong> León, Gto.</p>
+                    </div>
+
+                    <div class="info-card">
+                        <h3>🎉 Recepción</h3>
+                        <p><strong>Hora:</strong> 7:00 PM - 12:00 AM</p>
+                        <p><strong>Lugar:</strong> Por confirmar</p>
+                        <p><strong>Invitados:</strong> 300 personas</p>
+                        <p><strong>Comida:</strong> 7:00 PM</p>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Timeline de Pagos -->
+            <section class="section">
+                <h2 class="section-title">💰 Resumen de Pagos</h2>
+                <div class="grid-2">
+                    <div class="price-box">
+                        <div class="total">$8,500 MXN</div>
+                        <div class="detail">Paquete completo</div>
+                    </div>
+                    <div class="info-card">
+                        <h3>Estado de Pagos</h3>
+                        <p><span class="status-done">✓ Apartado:</span> $2,000 (1 febrero 2026)</p>
+                        <p><span class="status-pending">⏳ Saldo:</span> $6,500</p>
+                        <p><strong>Fecha límite:</strong> 25 de abril 2026</p>
+                        <p style="font-size: 0.9em; color: #666;">(7 días antes del evento)</p>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Cronología -->
+            <section class="section">
+                <h2 class="section-title">🕐 Fechas Importantes</h2>
+                <div class="timeline">
+                    <div class="timeline-item done">
+                        <strong>1 de Febrero 2026</strong> <span class="status-done">✓ Completado</span>
+                        <p>Apartado de $2,000 recibido</p>
+                    </div>
+                    <div class="timeline-item">
+                        <strong>Por definir</strong> <span class="status-pending">⏳ Pendiente</span>
+                        <p>Sesión fotográfica previa</p>
+                        <p style="font-size: 0.9em; color: #666;">Cuando tengas listo: vestido lila, ramo y uñas</p>
+                    </div>
+                    <div class="timeline-item">
+                        <strong>25 de Abril 2026</strong>
+                        <p>Fecha límite para liquidar saldo ($6,500)</p>
+                    </div>
+                    <div class="timeline-item">
+                        <strong>2 de Mayo 2026</strong>
+                        <p><strong>DÍA DEL EVENTO</strong></p>
+                    </div>
+                    <div class="timeline-item">
+                        <strong>Junio-Julio 2026</strong>
+                        <p>Entrega de material (30-45 días después)</p>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Lo que necesitamos de ti -->
+            <section class="section">
+                <h2 class="section-title">✅ Lo que necesitamos de ti</h2>
+                <ul class="checklist">
+                    <li>
+                        <span class="icon">📝</span>
+                        <div class="text">
+                            <strong>Datos para el contrato</strong><br>
+                            Nombre completo de la quinceañera, padres, padrinos (si aplica), y tu nombre y dirección
+                        </div>
+                    </li>
+                    <li>
+                        <span class="icon">📸</span>
+                        <div class="text">
+                            <strong>Coordinar sesión fotográfica</strong><br>
+                            Avísanos cuando tengas listo el vestido, ramo y uñas para agendar la sesión
+                        </div>
+                    </li>
+                    <li>
+                        <span class="icon">💳</span>
+                        <div class="text">
+                            <strong>Liquidar saldo</strong><br>
+                            $6,500 restantes antes del 25 de abril 2026
+                        </div>
+                    </li>
+                    <li>
+                        <span class="icon">🍽️</span>
+                        <div class="text">
+                            <strong>Reservar mesa para personal</strong><br>
+                            2 lugares en mesa para el equipo de foto y video durante el evento
+                        </div>
+                    </li>
+                    <li>
+                        <span class="icon">🖼️</span>
+                        <div class="text">
+                            <strong>Seleccionar fotos para impresión</strong><br>
+                            Después del evento, elegir las 100 fotos que deseas imprimir
+                        </div>
+                    </li>
+                </ul>
+
+                <div class="note-box">
+                    <strong>Nota sobre la invitación web:</strong> Cuando tengas las fotos de la sesión previa, actualizaremos la invitación digital con tus mejores fotos para compartir con tus invitados.
+                </div>
+            </section>
+
+            <!-- Paquete Incluido -->
+            <section class="section">
+                <h2 class="section-title">📦 Tu Paquete Incluye</h2>
+                <div class="grid-2">
+                    <div class="info-card">
+                        <h3>🎬 Cobertura</h3>
+                        <p>✓ Sesión fotográfica previa</p>
+                        <p>✓ 1 hora de ceremonia (misa)</p>
+                        <p>✓ 5 horas de recepción (7pm-12am)</p>
+                        <p>✓ Videoclip para proyectar</p>
+                    </div>
+                    <div class="info-card">
+                        <h3>📷 Entregables</h3>
+                        <p>✓ 100 fotos impresas 5x7"</p>
+                        <p>✓ USB con video editado</p>
+                        <p>✓ Foto ampliada 11x14"</p>
+                        <p>✓ Cajas impresas</p>
+                        <p>✓ Invitación web digital</p>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Contacto -->
+            <section class="section">
+                <div class="contact-box">
+                    <h3 style="margin-bottom: 1rem;">📞 Contacto Foro 7</h3>
+                    <p><strong>WhatsApp:</strong> <a href="https://wa.me/5214779203776">477-920-3776</a></p>
+                    <p><strong>Email:</strong> <a href="mailto:foro7producciones@gmail.com">foro7producciones@gmail.com</a></p>
+                    <p style="margin-top: 1rem;"><strong>Local:</strong> Padilla 112, Cumbres de Arbide, León, Gto.</p>
+                </div>
+            </section>
+
+        </div>
+    </div>
+</body>
+</html>
