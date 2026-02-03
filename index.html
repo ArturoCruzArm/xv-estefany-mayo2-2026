@@ -2,9 +2,10 @@
 <html lang="es">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>XV Años - Estefany Esmeralda</title>
     <meta name="description" content="Estás cordialmente invitado a celebrar los XV años de Estefany Esmeralda - 2 de Mayo, 2026">
+    <meta name="theme-color" content="#7b1fa2">
     <link rel="icon" type="image/svg+xml" href="favicon.svg">
     <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Cormorant+Garamond:wght@300;400;500;600&family=Montserrat:wght@300;400;500;600&display=swap" rel="stylesheet">
     <style>
@@ -23,6 +24,7 @@
             background: #0a0a0a;
             color: #333;
             overflow-x: hidden;
+            -webkit-font-smoothing: antialiased;
         }
 
         /* ==================== COVER PAGE ==================== */
@@ -32,7 +34,7 @@
             left: 0;
             width: 100%;
             height: 100%;
-            background: linear-gradient(135deg, #1a0a1f 0%, #2d1b36 50%, #1a0a1f 100%);
+            background: linear-gradient(135deg, #0d0015 0%, #1a0a2e 50%, #0d0015 100%);
             z-index: 9999;
             display: flex;
             flex-direction: column;
@@ -41,7 +43,7 @@
             text-align: center;
             padding: 2rem;
             cursor: pointer;
-            transition: opacity 0.8s ease, visibility 0.8s ease;
+            transition: opacity 1s ease, visibility 1s ease, transform 1s ease;
             overflow: hidden;
         }
 
@@ -49,132 +51,172 @@
             opacity: 0;
             visibility: hidden;
             pointer-events: none;
+            transform: scale(1.1);
         }
 
-        .cover-page::before {
-            content: '';
+        .cover-bg {
             position: absolute;
             top: 0;
             left: 0;
             right: 0;
             bottom: 0;
-            background: radial-gradient(circle at 50% 50%, rgba(156, 39, 176, 0.15) 0%, transparent 60%);
-            animation: coverGlow 4s ease-in-out infinite;
+            background:
+                radial-gradient(ellipse at 20% 80%, rgba(156, 39, 176, 0.15) 0%, transparent 50%),
+                radial-gradient(ellipse at 80% 20%, rgba(103, 58, 183, 0.15) 0%, transparent 50%),
+                radial-gradient(ellipse at 50% 50%, rgba(212, 175, 55, 0.08) 0%, transparent 60%);
+            animation: coverBgPulse 8s ease-in-out infinite;
         }
 
-        @keyframes coverGlow {
-            0%, 100% { opacity: 0.5; transform: scale(1); }
-            50% { opacity: 1; transform: scale(1.1); }
+        @keyframes coverBgPulse {
+            0%, 100% { opacity: 0.7; }
+            50% { opacity: 1; }
         }
 
         .cover-content {
             position: relative;
-            z-index: 1;
+            z-index: 2;
         }
 
-        .cover-ornament {
-            font-size: 2rem;
-            color: rgba(212, 175, 55, 0.6);
-            margin-bottom: 2rem;
-            letter-spacing: 1rem;
-            animation: fadeIn 1s ease-out;
+        .cover-icon {
+            width: 80px;
+            height: 80px;
+            margin: 0 auto 2rem;
+            opacity: 0;
+            animation: fadeInScale 1s ease-out 0.2s forwards;
+        }
+
+        .cover-icon svg {
+            width: 100%;
+            height: 100%;
+            fill: none;
+            stroke: rgba(212, 175, 55, 0.7);
+            stroke-width: 1;
         }
 
         .cover-label {
-            font-size: 0.9rem;
-            letter-spacing: 6px;
+            font-size: 0.85rem;
+            letter-spacing: 8px;
             text-transform: uppercase;
-            color: rgba(255, 255, 255, 0.6);
-            margin-bottom: 1rem;
-            animation: fadeIn 1s ease-out 0.2s both;
+            color: rgba(212, 175, 55, 0.8);
+            margin-bottom: 1.5rem;
+            opacity: 0;
+            animation: fadeInUp 1s ease-out 0.4s forwards;
         }
 
         .cover-title {
             font-family: 'Great Vibes', cursive;
             font-size: 4.5rem;
             color: white;
-            text-shadow: 0 0 40px rgba(156, 39, 176, 0.5);
             margin-bottom: 0.5rem;
-            animation: fadeIn 1s ease-out 0.4s both;
-            line-height: 1.2;
+            opacity: 0;
+            animation: fadeInUp 1s ease-out 0.6s forwards;
+            line-height: 1.1;
+            position: relative;
+        }
+
+        .cover-title::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 0;
+            height: 1px;
+            background: linear-gradient(90deg, transparent, rgba(212, 175, 55, 0.6), transparent);
+            animation: expandLine 1s ease-out 1.2s forwards;
+        }
+
+        @keyframes expandLine {
+            to { width: 200px; }
         }
 
         .cover-subtitle {
             font-family: 'Cormorant Garamond', serif;
-            font-size: 1.5rem;
-            color: rgba(255, 255, 255, 0.8);
-            letter-spacing: 4px;
-            margin-bottom: 3rem;
-            animation: fadeIn 1s ease-out 0.6s both;
+            font-size: 1.3rem;
+            color: rgba(255, 255, 255, 0.7);
+            letter-spacing: 6px;
+            text-transform: uppercase;
+            margin: 2rem 0;
+            opacity: 0;
+            animation: fadeInUp 1s ease-out 0.8s forwards;
         }
 
         .cover-date {
             font-family: 'Cormorant Garamond', serif;
-            font-size: 1.3rem;
-            color: rgba(212, 175, 55, 0.9);
-            letter-spacing: 3px;
+            font-size: 1.8rem;
+            color: white;
+            letter-spacing: 4px;
             margin-bottom: 3rem;
-            animation: fadeIn 1s ease-out 0.8s both;
+            opacity: 0;
+            animation: fadeInUp 1s ease-out 1s forwards;
+        }
+
+        .cover-date span {
+            color: rgba(212, 175, 55, 0.9);
         }
 
         .cover-button {
             display: inline-flex;
             align-items: center;
-            gap: 12px;
+            justify-content: center;
+            gap: 15px;
             background: transparent;
-            border: 2px solid rgba(212, 175, 55, 0.6);
+            border: 1px solid rgba(212, 175, 55, 0.5);
             color: rgba(212, 175, 55, 0.9);
-            padding: 1rem 2.5rem;
+            padding: 1.2rem 3rem;
             border-radius: 50px;
-            font-size: 0.9rem;
+            font-family: 'Montserrat', sans-serif;
+            font-size: 0.8rem;
             font-weight: 500;
-            letter-spacing: 4px;
+            letter-spacing: 5px;
             text-transform: uppercase;
             cursor: pointer;
-            transition: all 0.4s ease;
-            animation: fadeIn 1s ease-out 1s both, pulse 2s ease-in-out 2s infinite;
+            transition: all 0.5s ease;
+            opacity: 0;
+            animation: fadeInUp 1s ease-out 1.2s forwards, buttonGlow 3s ease-in-out 2.5s infinite;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .cover-button::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(212, 175, 55, 0.2), transparent);
+            transition: left 0.5s ease;
+        }
+
+        .cover-button:hover::before {
+            left: 100%;
         }
 
         .cover-button:hover {
-            background: rgba(212, 175, 55, 0.15);
-            border-color: rgba(212, 175, 55, 0.9);
+            background: rgba(212, 175, 55, 0.1);
+            border-color: rgba(212, 175, 55, 0.8);
             transform: scale(1.05);
+            box-shadow: 0 0 30px rgba(212, 175, 55, 0.3);
+        }
+
+        @keyframes buttonGlow {
+            0%, 100% { box-shadow: 0 0 0 0 rgba(212, 175, 55, 0); }
+            50% { box-shadow: 0 0 20px 5px rgba(212, 175, 55, 0.2); }
         }
 
         .cover-button svg {
-            width: 18px;
-            height: 18px;
+            width: 20px;
+            height: 20px;
             fill: currentColor;
-            animation: bounce 1.5s ease-in-out infinite;
+            transition: transform 0.3s ease;
         }
 
-        @keyframes bounce {
-            0%, 100% { transform: translateY(0); }
-            50% { transform: translateY(3px); }
+        .cover-button:hover svg {
+            transform: rotate(90deg);
         }
 
-        @keyframes pulse {
-            0%, 100% { box-shadow: 0 0 0 0 rgba(212, 175, 55, 0.4); }
-            50% { box-shadow: 0 0 0 15px rgba(212, 175, 55, 0); }
-        }
-
-        @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(20px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-
-        .cover-hint {
-            position: absolute;
-            bottom: 3rem;
-            left: 50%;
-            transform: translateX(-50%);
-            color: rgba(255, 255, 255, 0.4);
-            font-size: 0.75rem;
-            letter-spacing: 2px;
-            animation: fadeIn 1s ease-out 1.5s both;
-        }
-
-        /* Floating particles */
+        /* Particles */
         .particles {
             position: absolute;
             top: 0;
@@ -183,41 +225,60 @@
             height: 100%;
             overflow: hidden;
             pointer-events: none;
+            z-index: 1;
         }
 
         .particle {
             position: absolute;
-            width: 4px;
-            height: 4px;
-            background: rgba(212, 175, 55, 0.4);
             border-radius: 50%;
-            animation: float 15s infinite;
+            animation: floatParticle linear infinite;
+            opacity: 0;
         }
 
-        @keyframes float {
-            0%, 100% { transform: translateY(100vh) rotate(0deg); opacity: 0; }
+        .particle.gold {
+            background: radial-gradient(circle, rgba(212, 175, 55, 0.8) 0%, transparent 70%);
+        }
+
+        .particle.purple {
+            background: radial-gradient(circle, rgba(156, 39, 176, 0.6) 0%, transparent 70%);
+        }
+
+        @keyframes floatParticle {
+            0% { transform: translateY(100vh) rotate(0deg); opacity: 0; }
             10% { opacity: 1; }
             90% { opacity: 1; }
-            100% { transform: translateY(-100vh) rotate(720deg); opacity: 0; }
+            100% { transform: translateY(-20vh) rotate(360deg); opacity: 0; }
+        }
+
+        @keyframes fadeInUp {
+            from { opacity: 0; transform: translateY(30px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        @keyframes fadeInScale {
+            from { opacity: 0; transform: scale(0.8); }
+            to { opacity: 1; transform: scale(1); }
         }
 
         /* ==================== MAIN INVITATION ==================== */
         .invitation {
             opacity: 0;
-            transition: opacity 0.8s ease 0.3s;
+            visibility: hidden;
+            transition: opacity 1s ease 0.5s, visibility 1s ease 0.5s;
         }
 
         .invitation.visible {
             opacity: 1;
+            visibility: visible;
         }
 
         /* Music Button */
         .music-btn {
             position: fixed;
-            bottom: 30px;
-            right: 30px;
-            width: 56px;
-            height: 56px;
+            bottom: 25px;
+            right: 25px;
+            width: 52px;
+            height: 52px;
             border-radius: 50%;
             background: linear-gradient(135deg, #9c27b0 0%, #7b1fa2 100%);
             border: none;
@@ -226,35 +287,56 @@
             display: flex;
             align-items: center;
             justify-content: center;
-            box-shadow: 0 4px 20px rgba(156, 39, 176, 0.5);
+            box-shadow: 0 4px 15px rgba(156, 39, 176, 0.4);
             transition: all 0.3s ease;
             opacity: 0;
             visibility: hidden;
+            transform: scale(0.8);
         }
 
         .music-btn.visible {
             opacity: 1;
             visibility: visible;
+            transform: scale(1);
         }
 
         .music-btn:hover {
             transform: scale(1.1);
-            box-shadow: 0 6px 30px rgba(156, 39, 176, 0.7);
+            box-shadow: 0 6px 25px rgba(156, 39, 176, 0.6);
+        }
+
+        .music-btn:active {
+            transform: scale(0.95);
         }
 
         .music-btn svg {
-            width: 22px;
-            height: 22px;
+            width: 20px;
+            height: 20px;
             fill: white;
         }
 
         .music-btn.playing {
-            animation: musicPulse 2s infinite;
+            animation: musicPulse 2s ease-in-out infinite;
+        }
+
+        .music-btn.playing::after {
+            content: '';
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            border-radius: 50%;
+            border: 2px solid rgba(156, 39, 176, 0.5);
+            animation: musicRipple 1.5s ease-out infinite;
         }
 
         @keyframes musicPulse {
-            0%, 100% { box-shadow: 0 4px 20px rgba(156, 39, 176, 0.5); }
-            50% { box-shadow: 0 4px 35px rgba(156, 39, 176, 0.8); }
+            0%, 100% { box-shadow: 0 4px 15px rgba(156, 39, 176, 0.4); }
+            50% { box-shadow: 0 4px 25px rgba(156, 39, 176, 0.7); }
+        }
+
+        @keyframes musicRipple {
+            0% { transform: scale(1); opacity: 1; }
+            100% { transform: scale(1.8); opacity: 0; }
         }
 
         /* Hero Section */
@@ -266,7 +348,10 @@
             align-items: center;
             text-align: center;
             padding: 2rem;
-            background: linear-gradient(135deg, rgba(103, 58, 183, 0.95) 0%, rgba(156, 39, 176, 0.95) 50%, rgba(123, 31, 162, 0.95) 100%);
+            background: linear-gradient(180deg,
+                rgba(103, 58, 183, 0.95) 0%,
+                rgba(156, 39, 176, 0.9) 50%,
+                rgba(142, 36, 170, 0.95) 100%);
             color: white;
             position: relative;
             overflow: hidden;
@@ -279,245 +364,349 @@
             left: 0;
             right: 0;
             bottom: 0;
-            background: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='0.04'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+            background: url("data:image/svg+xml,%3Csvg width='100' height='100' viewBox='0 0 100 100' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M50 50m-1 0a1 1 0 1 0 2 0a1 1 0 1 0-2 0' fill='%23ffffff' fill-opacity='0.03'/%3E%3C/svg%3E");
+        }
+
+        .hero::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            height: 150px;
+            background: linear-gradient(to top, rgba(250, 250, 250, 1), transparent);
+            pointer-events: none;
         }
 
         .hero-content {
             position: relative;
             z-index: 1;
+            max-width: 600px;
         }
 
-        .hero-ornament {
-            font-size: 1.5rem;
-            color: rgba(255, 255, 255, 0.5);
-            letter-spacing: 0.5rem;
+        .hero-crown {
+            font-size: 3rem;
             margin-bottom: 1rem;
-            animation: fadeInDown 1s ease-out;
+            opacity: 0;
+            animation: fadeInDown 0.8s ease-out 0.2s forwards;
         }
 
         .hero-label {
-            font-size: 1rem;
-            letter-spacing: 8px;
+            font-size: 0.9rem;
+            letter-spacing: 10px;
             text-transform: uppercase;
-            opacity: 0.9;
-            margin-bottom: 1rem;
-            animation: fadeInDown 1s ease-out 0.1s both;
+            opacity: 0;
+            animation: fadeInDown 0.8s ease-out 0.3s forwards;
+            margin-bottom: 0.5rem;
         }
 
         .hero-title {
             font-family: 'Great Vibes', cursive;
-            font-size: 5rem;
+            font-size: 4.5rem;
             margin-bottom: 0.5rem;
-            text-shadow: 2px 4px 8px rgba(0,0,0,0.3);
-            animation: fadeInDown 1s ease-out 0.2s both;
+            text-shadow: 0 4px 20px rgba(0,0,0,0.3);
+            opacity: 0;
+            animation: fadeInDown 0.8s ease-out 0.4s forwards;
             line-height: 1.1;
         }
 
-        .decorative-line {
-            width: 150px;
-            height: 1px;
-            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.8), transparent);
-            margin: 1.5rem auto;
-            position: relative;
+        .hero-divider {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 1rem;
+            margin: 1.5rem 0;
+            opacity: 0;
+            animation: fadeIn 0.8s ease-out 0.5s forwards;
         }
 
-        .decorative-line::before {
-            content: '';
-            position: absolute;
-            left: 50%;
-            top: 50%;
-            transform: translate(-50%, -50%);
-            width: 8px;
-            height: 8px;
-            background: white;
-            border-radius: 50%;
+        .hero-divider-line {
+            width: 60px;
+            height: 1px;
+            background: rgba(255,255,255,0.5);
+        }
+
+        .hero-divider-icon {
+            font-size: 0.8rem;
+            opacity: 0.7;
         }
 
         .hero-date {
             font-family: 'Cormorant Garamond', serif;
-            font-size: 2.2rem;
+            font-size: 2rem;
             font-weight: 400;
-            letter-spacing: 2px;
+            letter-spacing: 3px;
             margin-bottom: 0.5rem;
-            animation: fadeInUp 1s ease-out 0.4s both;
+            opacity: 0;
+            animation: fadeInUp 0.8s ease-out 0.6s forwards;
         }
 
         .hero-location {
-            font-size: 1rem;
+            font-size: 0.9rem;
             font-weight: 300;
-            letter-spacing: 4px;
+            letter-spacing: 5px;
             text-transform: uppercase;
-            opacity: 0.9;
-            animation: fadeInUp 1s ease-out 0.5s both;
+            opacity: 0;
+            animation: fadeInUp 0.8s ease-out 0.7s forwards;
         }
 
         /* Countdown */
         .countdown {
             display: flex;
             justify-content: center;
-            gap: 1rem;
+            gap: 0.8rem;
             margin-top: 2.5rem;
-            animation: fadeInUp 1s ease-out 0.6s both;
+            opacity: 0;
+            animation: fadeInUp 0.8s ease-out 0.8s forwards;
         }
 
         .countdown-item {
             text-align: center;
-            background: rgba(255,255,255,0.1);
+            background: rgba(255,255,255,0.15);
             backdrop-filter: blur(10px);
-            padding: 1rem 1.2rem;
-            border-radius: 12px;
+            padding: 1rem;
+            border-radius: 16px;
             min-width: 70px;
-            border: 1px solid rgba(255,255,255,0.15);
+            border: 1px solid rgba(255,255,255,0.1);
+            transition: transform 0.3s ease, background 0.3s ease;
+        }
+
+        .countdown-item:hover {
+            transform: translateY(-5px);
+            background: rgba(255,255,255,0.2);
         }
 
         .countdown-number {
             font-family: 'Cormorant Garamond', serif;
-            font-size: 2.2rem;
+            font-size: 2rem;
             font-weight: 600;
             display: block;
             line-height: 1;
         }
 
         .countdown-label {
-            font-size: 0.65rem;
+            font-size: 0.6rem;
             text-transform: uppercase;
             letter-spacing: 2px;
-            opacity: 0.7;
-            margin-top: 0.4rem;
+            opacity: 0.8;
+            margin-top: 0.5rem;
         }
 
         /* Scroll Indicator */
         .scroll-indicator {
             position: absolute;
-            bottom: 30px;
+            bottom: 40px;
             left: 50%;
             transform: translateX(-50%);
-            animation: scrollBounce 2s infinite;
             cursor: pointer;
+            opacity: 0;
+            animation: fadeIn 0.8s ease-out 1s forwards;
+            z-index: 2;
+        }
+
+        .scroll-indicator-inner {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 8px;
+            transition: transform 0.3s ease;
+        }
+
+        .scroll-indicator:hover .scroll-indicator-inner {
+            transform: translateY(5px);
+        }
+
+        .scroll-indicator-text {
+            font-size: 0.65rem;
+            letter-spacing: 3px;
+            text-transform: uppercase;
             opacity: 0.7;
-            transition: opacity 0.3s;
         }
 
-        .scroll-indicator:hover {
-            opacity: 1;
+        .scroll-indicator-icon {
+            width: 24px;
+            height: 40px;
+            border: 2px solid rgba(255,255,255,0.5);
+            border-radius: 12px;
+            position: relative;
         }
 
-        .scroll-indicator svg {
-            width: 28px;
-            height: 28px;
-            fill: white;
+        .scroll-indicator-icon::before {
+            content: '';
+            position: absolute;
+            top: 8px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 4px;
+            height: 8px;
+            background: white;
+            border-radius: 2px;
+            animation: scrollDown 1.5s ease-in-out infinite;
         }
 
-        @keyframes scrollBounce {
-            0%, 20%, 50%, 80%, 100% { transform: translateX(-50%) translateY(0); }
-            40% { transform: translateX(-50%) translateY(-8px); }
-            60% { transform: translateX(-50%) translateY(-4px); }
+        @keyframes scrollDown {
+            0%, 100% { opacity: 1; top: 8px; }
+            50% { opacity: 0.5; top: 18px; }
+        }
+
+        @keyframes fadeInDown {
+            from { opacity: 0; transform: translateY(-20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
         }
 
         /* Info Section */
         .info-section {
             background: #fafafa;
-            padding: 5rem 2rem;
+            padding: 6rem 2rem;
+            position: relative;
         }
 
         .section-header {
             text-align: center;
-            margin-bottom: 3.5rem;
+            margin-bottom: 4rem;
+        }
+
+        .section-icon {
+            font-size: 2rem;
+            margin-bottom: 1rem;
+            opacity: 0.8;
         }
 
         .section-title {
             font-family: 'Great Vibes', cursive;
-            font-size: 3.2rem;
+            font-size: 3rem;
             color: #7b1fa2;
-            margin-bottom: 0.8rem;
+            margin-bottom: 0.5rem;
         }
 
         .section-subtitle {
             font-family: 'Cormorant Garamond', serif;
-            font-size: 1.1rem;
-            color: #888;
-            letter-spacing: 3px;
+            font-size: 1rem;
+            color: #999;
+            letter-spacing: 4px;
             text-transform: uppercase;
         }
 
         .event-details {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+            grid-template-columns: repeat(3, 1fr);
             gap: 1.5rem;
-            max-width: 950px;
+            max-width: 900px;
             margin: 0 auto;
         }
 
         .detail-card {
             background: white;
-            border-radius: 16px;
-            padding: 2rem 1.5rem;
+            border-radius: 20px;
+            padding: 2.5rem 1.5rem;
             text-align: center;
-            box-shadow: 0 8px 30px rgba(0,0,0,0.06);
-            transition: all 0.4s ease;
-            border: 1px solid rgba(156, 39, 176, 0.08);
+            box-shadow: 0 10px 40px rgba(0,0,0,0.04);
+            transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+            border: 1px solid rgba(0,0,0,0.04);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .detail-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: linear-gradient(90deg, #9c27b0, #7b1fa2);
+            transform: scaleX(0);
+            transition: transform 0.5s ease;
+        }
+
+        .detail-card:hover::before {
+            transform: scaleX(1);
         }
 
         .detail-card:hover {
-            transform: translateY(-8px);
-            box-shadow: 0 16px 40px rgba(156, 39, 176, 0.12);
+            transform: translateY(-10px);
+            box-shadow: 0 20px 50px rgba(156, 39, 176, 0.12);
         }
 
         .detail-icon {
-            width: 65px;
-            height: 65px;
-            background: linear-gradient(135deg, #9c27b0 0%, #7b1fa2 100%);
+            width: 70px;
+            height: 70px;
+            background: linear-gradient(135deg, #f3e5f5 0%, #e1bee7 100%);
             border-radius: 50%;
             display: flex;
             align-items: center;
             justify-content: center;
-            margin: 0 auto 1.2rem;
+            margin: 0 auto 1.5rem;
             font-size: 1.8rem;
+            transition: all 0.5s ease;
+        }
+
+        .detail-card:hover .detail-icon {
+            background: linear-gradient(135deg, #9c27b0 0%, #7b1fa2 100%);
+            transform: scale(1.1) rotate(10deg);
         }
 
         .detail-title {
             font-family: 'Cormorant Garamond', serif;
-            font-size: 1.4rem;
+            font-size: 1.3rem;
             font-weight: 600;
             color: #333;
-            margin-bottom: 0.8rem;
+            margin-bottom: 1rem;
         }
 
         .detail-content {
             color: #666;
-            line-height: 1.7;
-            font-size: 0.95rem;
+            line-height: 1.8;
+            font-size: 0.9rem;
         }
 
         .detail-content strong {
             color: #7b1fa2;
-            font-size: 1.2rem;
+            font-size: 1.4rem;
+            font-weight: 600;
             display: block;
-            margin-bottom: 0.4rem;
+            margin-bottom: 0.5rem;
+            font-family: 'Cormorant Garamond', serif;
         }
 
         /* Message Section */
         .message-section {
-            background: linear-gradient(135deg, #673ab7 0%, #9c27b0 50%, #7b1fa2 100%);
+            background: linear-gradient(135deg, #673ab7 0%, #9c27b0 50%, #8e24aa 100%);
             color: white;
-            padding: 5rem 2rem;
+            padding: 6rem 2rem;
             text-align: center;
             position: relative;
+            overflow: hidden;
+        }
+
+        .message-section::before,
+        .message-section::after {
+            content: '"';
+            font-family: 'Great Vibes', cursive;
+            font-size: 20rem;
+            position: absolute;
+            opacity: 0.05;
+            line-height: 1;
         }
 
         .message-section::before {
-            content: '"';
-            font-family: 'Great Vibes', cursive;
-            font-size: 12rem;
-            position: absolute;
-            top: -1rem;
-            left: 50%;
-            transform: translateX(-50%);
-            opacity: 0.08;
+            top: -3rem;
+            left: 5%;
+        }
+
+        .message-section::after {
+            bottom: -8rem;
+            right: 5%;
+            transform: rotate(180deg);
         }
 
         .message-box {
-            max-width: 750px;
+            max-width: 700px;
             margin: 0 auto;
             position: relative;
             z-index: 1;
@@ -525,23 +714,28 @@
 
         .message-text {
             font-family: 'Cormorant Garamond', serif;
-            font-size: 1.5rem;
-            line-height: 2;
+            font-size: 1.6rem;
+            line-height: 2.2;
             font-style: italic;
             font-weight: 300;
         }
 
         .message-signature {
-            margin-top: 2rem;
+            margin-top: 2.5rem;
             font-family: 'Great Vibes', cursive;
-            font-size: 2.8rem;
+            font-size: 3rem;
         }
 
         /* CTA Section */
         .cta-section {
             background: white;
-            padding: 5rem 2rem;
+            padding: 6rem 2rem;
             text-align: center;
+        }
+
+        .cta-container {
+            max-width: 500px;
+            margin: 0 auto;
         }
 
         .cta-button {
@@ -550,19 +744,40 @@
             gap: 12px;
             background: linear-gradient(135deg, #25d366 0%, #128c7e 100%);
             color: white;
-            padding: 1.1rem 2.5rem;
+            padding: 1.2rem 2.5rem;
             border-radius: 50px;
             text-decoration: none;
             font-size: 1rem;
             font-weight: 500;
             letter-spacing: 1px;
-            transition: all 0.4s ease;
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
             box-shadow: 0 8px 25px rgba(37, 211, 102, 0.3);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .cta-button::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
+            transition: left 0.5s ease;
+        }
+
+        .cta-button:hover::before {
+            left: 100%;
         }
 
         .cta-button:hover {
-            transform: translateY(-3px);
+            transform: translateY(-3px) scale(1.02);
             box-shadow: 0 12px 35px rgba(37, 211, 102, 0.4);
+        }
+
+        .cta-button:active {
+            transform: translateY(-1px) scale(0.98);
         }
 
         .cta-button svg {
@@ -579,68 +794,71 @@
 
         /* Gallery Section */
         .gallery-section {
-            background: linear-gradient(135deg, #f3e5f5 0%, #fce4ec 100%);
-            padding: 5rem 2rem;
+            background: linear-gradient(180deg, #f3e5f5 0%, #fce4ec 100%);
+            padding: 6rem 2rem;
             text-align: center;
         }
 
         .gallery-placeholder {
-            max-width: 550px;
+            max-width: 500px;
             margin: 0 auto;
             padding: 3rem 2rem;
             background: white;
-            border-radius: 16px;
-            box-shadow: 0 8px 30px rgba(0,0,0,0.05);
+            border-radius: 20px;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.05);
+        }
+
+        .gallery-icon {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+            opacity: 0.5;
         }
 
         .gallery-placeholder p {
             color: #666;
             font-size: 1rem;
-            line-height: 1.7;
+            line-height: 1.8;
         }
 
         /* Footer */
         .footer {
-            background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
+            background: linear-gradient(135deg, #1a1a2e 0%, #0f0f1a 100%);
             color: white;
             text-align: center;
-            padding: 2.5rem 2rem;
+            padding: 3rem 2rem;
         }
 
-        .footer-brand {
-            font-size: 1.2rem;
-            font-weight: 600;
-            margin-bottom: 0.4rem;
+        .footer-logo {
+            font-family: 'Great Vibes', cursive;
+            font-size: 2rem;
+            margin-bottom: 0.5rem;
+            background: linear-gradient(90deg, #9c27b0, #e91e63);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
         }
 
         .footer-tagline {
-            opacity: 0.7;
-            font-size: 0.9rem;
-            margin-bottom: 0.8rem;
+            opacity: 0.6;
+            font-size: 0.85rem;
+            margin-bottom: 1rem;
         }
 
         .footer-contact {
-            opacity: 0.6;
-            font-size: 0.85rem;
+            opacity: 0.5;
+            font-size: 0.8rem;
+        }
+
+        .footer-divider {
+            width: 50px;
+            height: 1px;
+            background: rgba(255,255,255,0.2);
+            margin: 1.5rem auto;
         }
 
         .footer-credit {
-            margin-top: 1.5rem;
-            padding-top: 1.5rem;
-            border-top: 1px solid rgba(255,255,255,0.1);
-            font-size: 0.8rem;
-            opacity: 0.4;
-        }
-
-        /* Animations */
-        @keyframes fadeInDown {
-            from { opacity: 0; transform: translateY(-25px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-
-        @keyframes fadeInUp {
-            from { opacity: 0; transform: translateY(25px); }
-            to { opacity: 1; transform: translateY(0); }
+            font-size: 0.75rem;
+            opacity: 0.3;
         }
 
         /* Responsive */
@@ -650,28 +868,43 @@
             }
 
             .cover-subtitle {
-                font-size: 1.2rem;
+                font-size: 1rem;
+                letter-spacing: 4px;
+            }
+
+            .cover-date {
+                font-size: 1.4rem;
+            }
+
+            .cover-button {
+                padding: 1rem 2rem;
+                font-size: 0.7rem;
             }
 
             .hero-title {
-                font-size: 3.2rem;
+                font-size: 3rem;
             }
 
             .hero-date {
-                font-size: 1.6rem;
+                font-size: 1.5rem;
             }
 
             .countdown {
-                gap: 0.6rem;
+                gap: 0.5rem;
             }
 
             .countdown-item {
-                padding: 0.8rem;
+                padding: 0.8rem 0.6rem;
                 min-width: 60px;
             }
 
             .countdown-number {
-                font-size: 1.6rem;
+                font-size: 1.5rem;
+            }
+
+            .event-details {
+                grid-template-columns: 1fr;
+                max-width: 350px;
             }
 
             .section-title {
@@ -683,8 +916,8 @@
             }
 
             .music-btn {
-                width: 48px;
-                height: 48px;
+                width: 46px;
+                height: 46px;
                 bottom: 20px;
                 right: 20px;
             }
@@ -692,6 +925,13 @@
             .music-btn svg {
                 width: 18px;
                 height: 18px;
+            }
+
+            .info-section,
+            .cta-section,
+            .gallery-section,
+            .message-section {
+                padding: 4rem 1.5rem;
             }
         }
     </style>
@@ -704,22 +944,25 @@
 
     <!-- ==================== COVER PAGE ==================== -->
     <div class="cover-page" id="coverPage" onclick="openInvitation()">
+        <div class="cover-bg"></div>
         <div class="particles" id="particles"></div>
 
         <div class="cover-content">
-            <div class="cover-ornament">&#10022; &#10022; &#10022;</div>
-            <p class="cover-label">Mis XV Años</p>
-            <h1 class="cover-title">Estefany Esmeralda</h1>
-            <p class="cover-subtitle">Te invita a celebrar</p>
-            <p class="cover-date">2 de Mayo, 2026</p>
+            <div class="cover-icon">
+                <svg viewBox="0 0 100 100">
+                    <path d="M50 10 L60 35 L85 35 L65 50 L75 80 L50 62 L25 80 L35 50 L15 35 L40 35 Z" />
+                </svg>
+            </div>
+            <p class="cover-label">Te invito a mis</p>
+            <h1 class="cover-title">XV Años</h1>
+            <p class="cover-subtitle">Estefany Esmeralda</p>
+            <p class="cover-date"><span>2</span> de Mayo, <span>2026</span></p>
 
             <button class="cover-button">
                 <span>Abrir Invitación</span>
                 <svg viewBox="0 0 24 24"><path d="M19 13h-6v6h-2v-6H5v-2h6V5h2v6h6v2z"/></svg>
             </button>
         </div>
-
-        <p class="cover-hint">Toca para abrir</p>
     </div>
 
     <!-- ==================== MAIN INVITATION ==================== -->
@@ -737,10 +980,16 @@
         <!-- Hero Section -->
         <section class="hero" id="inicio">
             <div class="hero-content">
-                <div class="hero-ornament">&#10022;</div>
+                <div class="hero-crown">👑</div>
                 <p class="hero-label">Mis XV Años</p>
                 <h1 class="hero-title">Estefany Esmeralda</h1>
-                <div class="decorative-line"></div>
+
+                <div class="hero-divider">
+                    <span class="hero-divider-line"></span>
+                    <span class="hero-divider-icon">✦</span>
+                    <span class="hero-divider-line"></span>
+                </div>
+
                 <p class="hero-date">2 de Mayo, 2026</p>
                 <p class="hero-location">León, Guanajuato</p>
 
@@ -765,15 +1014,17 @@
             </div>
 
             <a href="#detalles" class="scroll-indicator">
-                <svg viewBox="0 0 24 24">
-                    <path d="M7.41 8.59L12 13.17l4.59-4.58L18 10l-6 6-6-6 1.41-1.41z"/>
-                </svg>
+                <div class="scroll-indicator-inner">
+                    <span class="scroll-indicator-text">Desliza</span>
+                    <div class="scroll-indicator-icon"></div>
+                </div>
             </a>
         </section>
 
         <!-- Details Section -->
         <section class="info-section" id="detalles">
             <div class="section-header">
+                <div class="section-icon">📍</div>
                 <h2 class="section-title">Detalles del Evento</h2>
                 <p class="section-subtitle">Te esperamos</p>
             </div>
@@ -781,11 +1032,11 @@
             <div class="event-details">
                 <div class="detail-card">
                     <div class="detail-icon">⛪</div>
-                    <h3 class="detail-title">Ceremonia Religiosa</h3>
+                    <h3 class="detail-title">Ceremonia</h3>
                     <div class="detail-content">
                         <strong>5:00 PM</strong>
                         <p>Por confirmar</p>
-                        <p>León, Guanajuato</p>
+                        <p>León, Gto.</p>
                     </div>
                 </div>
 
@@ -795,13 +1046,13 @@
                     <div class="detail-content">
                         <strong>7:00 PM</strong>
                         <p>Por confirmar</p>
-                        <p>León, Guanajuato</p>
+                        <p>León, Gto.</p>
                     </div>
                 </div>
 
                 <div class="detail-card">
                     <div class="detail-icon">👗</div>
-                    <h3 class="detail-title">Código de Vestimenta</h3>
+                    <h3 class="detail-title">Vestimenta</h3>
                     <div class="detail-content">
                         <strong>Formal</strong>
                         <p>Elegante</p>
@@ -823,49 +1074,57 @@
         <!-- CTA Section -->
         <section class="cta-section">
             <div class="section-header">
+                <div class="section-icon">💌</div>
                 <h2 class="section-title">Confirma tu Asistencia</h2>
-                <p class="section-subtitle">Antes del 25 de abril de 2026</p>
+                <p class="section-subtitle">Antes del 25 de abril</p>
             </div>
 
-            <a href="https://wa.me/5214773359100?text=Hola,%20confirmo%20mi%20asistencia%20a%20los%20XV%20años%20de%20Estefany" class="cta-button">
-                <svg viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
-                Confirmar por WhatsApp
-            </a>
-
-            <p class="cta-note">Ana Silvia Herrera Solano</p>
+            <div class="cta-container">
+                <a href="https://wa.me/5214773359100?text=Hola,%20confirmo%20mi%20asistencia%20a%20los%20XV%20años%20de%20Estefany" class="cta-button">
+                    <svg viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+                    Confirmar por WhatsApp
+                </a>
+                <p class="cta-note">Ana Silvia Herrera Solano</p>
+            </div>
         </section>
 
         <!-- Gallery Section -->
         <section class="gallery-section">
             <div class="section-header">
-                <h2 class="section-title">Galería de Fotos</h2>
+                <div class="section-icon">📸</div>
+                <h2 class="section-title">Galería</h2>
                 <p class="section-subtitle">Momentos especiales</p>
             </div>
 
             <div class="gallery-placeholder">
+                <div class="gallery-icon">🖼️</div>
                 <p>Las fotos de la sesión previa se mostrarán aquí próximamente.</p>
-                <p style="margin-top: 1rem; color: #999; font-size: 0.85rem;">(Pendiente de sesión fotográfica)</p>
             </div>
         </section>
 
         <!-- Footer -->
         <footer class="footer">
-            <p class="footer-brand">Producciones Foro 7</p>
+            <p class="footer-logo">Foro 7</p>
             <p class="footer-tagline">Fotografía, Video e Invitaciones Web</p>
-            <p class="footer-contact">WhatsApp: 477-920-3776 | foro7producciones@gmail.com</p>
-            <p class="footer-credit">Invitación digital creada con amor por Foro 7</p>
+            <p class="footer-contact">477-920-3776 | foro7producciones@gmail.com</p>
+            <div class="footer-divider"></div>
+            <p class="footer-credit">Invitación digital creada con amor</p>
         </footer>
     </div>
 
     <script>
         // Create floating particles
         const particlesContainer = document.getElementById('particles');
-        for (let i = 0; i < 20; i++) {
+        const particleCount = 30;
+
+        for (let i = 0; i < particleCount; i++) {
             const particle = document.createElement('div');
-            particle.className = 'particle';
+            particle.className = 'particle ' + (Math.random() > 0.5 ? 'gold' : 'purple');
             particle.style.left = Math.random() * 100 + '%';
-            particle.style.animationDelay = Math.random() * 15 + 's';
-            particle.style.animationDuration = (15 + Math.random() * 10) + 's';
+            particle.style.width = (3 + Math.random() * 6) + 'px';
+            particle.style.height = particle.style.width;
+            particle.style.animationDelay = Math.random() * 20 + 's';
+            particle.style.animationDuration = (20 + Math.random() * 15) + 's';
             particlesContainer.appendChild(particle);
         }
 
@@ -880,16 +1139,13 @@
 
         // Open invitation and play music
         function openInvitation() {
-            // Hide cover
             coverPage.classList.add('hidden');
 
-            // Show invitation
             setTimeout(() => {
                 invitation.classList.add('visible');
                 musicBtn.classList.add('visible');
-            }, 300);
+            }, 400);
 
-            // Play music
             audio.play().then(() => {
                 isPlaying = true;
                 playIcon.style.display = 'none';
@@ -943,7 +1199,7 @@
 
         // Intersection Observer for scroll animations
         const observerOptions = {
-            threshold: 0.1,
+            threshold: 0.15,
             rootMargin: '0px 0px -50px 0px'
         };
 
@@ -956,11 +1212,16 @@
             });
         }, observerOptions);
 
-        document.querySelectorAll('.detail-card, .section-header').forEach(el => {
+        document.querySelectorAll('.detail-card, .section-header, .message-box, .cta-container, .gallery-placeholder').forEach(el => {
             el.style.opacity = '0';
-            el.style.transform = 'translateY(25px)';
-            el.style.transition = 'all 0.6s ease';
+            el.style.transform = 'translateY(30px)';
+            el.style.transition = 'all 0.8s cubic-bezier(0.4, 0, 0.2, 1)';
             observer.observe(el);
+        });
+
+        // Add staggered animation to cards
+        document.querySelectorAll('.detail-card').forEach((card, index) => {
+            card.style.transitionDelay = (index * 0.15) + 's';
         });
     </script>
 </body>
