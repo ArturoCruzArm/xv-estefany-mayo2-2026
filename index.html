@@ -25,13 +25,199 @@
             overflow-x: hidden;
         }
 
+        /* ==================== COVER PAGE ==================== */
+        .cover-page {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, #1a0a1f 0%, #2d1b36 50%, #1a0a1f 100%);
+            z-index: 9999;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            padding: 2rem;
+            cursor: pointer;
+            transition: opacity 0.8s ease, visibility 0.8s ease;
+            overflow: hidden;
+        }
+
+        .cover-page.hidden {
+            opacity: 0;
+            visibility: hidden;
+            pointer-events: none;
+        }
+
+        .cover-page::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: radial-gradient(circle at 50% 50%, rgba(156, 39, 176, 0.15) 0%, transparent 60%);
+            animation: coverGlow 4s ease-in-out infinite;
+        }
+
+        @keyframes coverGlow {
+            0%, 100% { opacity: 0.5; transform: scale(1); }
+            50% { opacity: 1; transform: scale(1.1); }
+        }
+
+        .cover-content {
+            position: relative;
+            z-index: 1;
+        }
+
+        .cover-ornament {
+            font-size: 2rem;
+            color: rgba(212, 175, 55, 0.6);
+            margin-bottom: 2rem;
+            letter-spacing: 1rem;
+            animation: fadeIn 1s ease-out;
+        }
+
+        .cover-label {
+            font-size: 0.9rem;
+            letter-spacing: 6px;
+            text-transform: uppercase;
+            color: rgba(255, 255, 255, 0.6);
+            margin-bottom: 1rem;
+            animation: fadeIn 1s ease-out 0.2s both;
+        }
+
+        .cover-title {
+            font-family: 'Great Vibes', cursive;
+            font-size: 4.5rem;
+            color: white;
+            text-shadow: 0 0 40px rgba(156, 39, 176, 0.5);
+            margin-bottom: 0.5rem;
+            animation: fadeIn 1s ease-out 0.4s both;
+            line-height: 1.2;
+        }
+
+        .cover-subtitle {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1.5rem;
+            color: rgba(255, 255, 255, 0.8);
+            letter-spacing: 4px;
+            margin-bottom: 3rem;
+            animation: fadeIn 1s ease-out 0.6s both;
+        }
+
+        .cover-date {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1.3rem;
+            color: rgba(212, 175, 55, 0.9);
+            letter-spacing: 3px;
+            margin-bottom: 3rem;
+            animation: fadeIn 1s ease-out 0.8s both;
+        }
+
+        .cover-button {
+            display: inline-flex;
+            align-items: center;
+            gap: 12px;
+            background: transparent;
+            border: 2px solid rgba(212, 175, 55, 0.6);
+            color: rgba(212, 175, 55, 0.9);
+            padding: 1rem 2.5rem;
+            border-radius: 50px;
+            font-size: 0.9rem;
+            font-weight: 500;
+            letter-spacing: 4px;
+            text-transform: uppercase;
+            cursor: pointer;
+            transition: all 0.4s ease;
+            animation: fadeIn 1s ease-out 1s both, pulse 2s ease-in-out 2s infinite;
+        }
+
+        .cover-button:hover {
+            background: rgba(212, 175, 55, 0.15);
+            border-color: rgba(212, 175, 55, 0.9);
+            transform: scale(1.05);
+        }
+
+        .cover-button svg {
+            width: 18px;
+            height: 18px;
+            fill: currentColor;
+            animation: bounce 1.5s ease-in-out infinite;
+        }
+
+        @keyframes bounce {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(3px); }
+        }
+
+        @keyframes pulse {
+            0%, 100% { box-shadow: 0 0 0 0 rgba(212, 175, 55, 0.4); }
+            50% { box-shadow: 0 0 0 15px rgba(212, 175, 55, 0); }
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .cover-hint {
+            position: absolute;
+            bottom: 3rem;
+            left: 50%;
+            transform: translateX(-50%);
+            color: rgba(255, 255, 255, 0.4);
+            font-size: 0.75rem;
+            letter-spacing: 2px;
+            animation: fadeIn 1s ease-out 1.5s both;
+        }
+
+        /* Floating particles */
+        .particles {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+            pointer-events: none;
+        }
+
+        .particle {
+            position: absolute;
+            width: 4px;
+            height: 4px;
+            background: rgba(212, 175, 55, 0.4);
+            border-radius: 50%;
+            animation: float 15s infinite;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(100vh) rotate(0deg); opacity: 0; }
+            10% { opacity: 1; }
+            90% { opacity: 1; }
+            100% { transform: translateY(-100vh) rotate(720deg); opacity: 0; }
+        }
+
+        /* ==================== MAIN INVITATION ==================== */
+        .invitation {
+            opacity: 0;
+            transition: opacity 0.8s ease 0.3s;
+        }
+
+        .invitation.visible {
+            opacity: 1;
+        }
+
         /* Music Button */
         .music-btn {
             position: fixed;
             bottom: 30px;
             right: 30px;
-            width: 60px;
-            height: 60px;
+            width: 56px;
+            height: 56px;
             border-radius: 50%;
             background: linear-gradient(135deg, #9c27b0 0%, #7b1fa2 100%);
             border: none;
@@ -42,6 +228,13 @@
             justify-content: center;
             box-shadow: 0 4px 20px rgba(156, 39, 176, 0.5);
             transition: all 0.3s ease;
+            opacity: 0;
+            visibility: hidden;
+        }
+
+        .music-btn.visible {
+            opacity: 1;
+            visibility: visible;
         }
 
         .music-btn:hover {
@@ -50,18 +243,18 @@
         }
 
         .music-btn svg {
-            width: 24px;
-            height: 24px;
+            width: 22px;
+            height: 22px;
             fill: white;
         }
 
         .music-btn.playing {
-            animation: pulse 2s infinite;
+            animation: musicPulse 2s infinite;
         }
 
-        @keyframes pulse {
+        @keyframes musicPulse {
             0%, 100% { box-shadow: 0 4px 20px rgba(156, 39, 176, 0.5); }
-            50% { box-shadow: 0 4px 40px rgba(156, 39, 176, 0.8); }
+            50% { box-shadow: 0 4px 35px rgba(156, 39, 176, 0.8); }
         }
 
         /* Hero Section */
@@ -86,13 +279,20 @@
             left: 0;
             right: 0;
             bottom: 0;
-            background: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='0.05'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
-            opacity: 0.5;
+            background: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='0.04'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
         }
 
         .hero-content {
             position: relative;
             z-index: 1;
+        }
+
+        .hero-ornament {
+            font-size: 1.5rem;
+            color: rgba(255, 255, 255, 0.5);
+            letter-spacing: 0.5rem;
+            margin-bottom: 1rem;
+            animation: fadeInDown 1s ease-out;
         }
 
         .hero-label {
@@ -101,25 +301,16 @@
             text-transform: uppercase;
             opacity: 0.9;
             margin-bottom: 1rem;
-            animation: fadeInDown 1s ease-out;
+            animation: fadeInDown 1s ease-out 0.1s both;
         }
 
         .hero-title {
             font-family: 'Great Vibes', cursive;
-            font-size: 5.5rem;
+            font-size: 5rem;
             margin-bottom: 0.5rem;
             text-shadow: 2px 4px 8px rgba(0,0,0,0.3);
             animation: fadeInDown 1s ease-out 0.2s both;
             line-height: 1.1;
-        }
-
-        .hero-subtitle {
-            font-family: 'Cormorant Garamond', serif;
-            font-size: 1.8rem;
-            font-weight: 300;
-            letter-spacing: 3px;
-            margin-bottom: 2rem;
-            animation: fadeInUp 1s ease-out 0.4s both;
         }
 
         .decorative-line {
@@ -136,63 +327,63 @@
             left: 50%;
             top: 50%;
             transform: translate(-50%, -50%);
-            width: 10px;
-            height: 10px;
+            width: 8px;
+            height: 8px;
             background: white;
             border-radius: 50%;
         }
 
         .hero-date {
             font-family: 'Cormorant Garamond', serif;
-            font-size: 2.5rem;
+            font-size: 2.2rem;
             font-weight: 400;
             letter-spacing: 2px;
             margin-bottom: 0.5rem;
-            animation: fadeInUp 1s ease-out 0.6s both;
+            animation: fadeInUp 1s ease-out 0.4s both;
         }
 
         .hero-location {
-            font-size: 1.1rem;
+            font-size: 1rem;
             font-weight: 300;
             letter-spacing: 4px;
             text-transform: uppercase;
             opacity: 0.9;
-            animation: fadeInUp 1s ease-out 0.8s both;
+            animation: fadeInUp 1s ease-out 0.5s both;
         }
 
         /* Countdown */
         .countdown {
             display: flex;
             justify-content: center;
-            gap: 1.5rem;
-            margin-top: 3rem;
-            animation: fadeInUp 1s ease-out 1s both;
+            gap: 1rem;
+            margin-top: 2.5rem;
+            animation: fadeInUp 1s ease-out 0.6s both;
         }
 
         .countdown-item {
             text-align: center;
             background: rgba(255,255,255,0.1);
             backdrop-filter: blur(10px);
-            padding: 1.2rem 1.5rem;
-            border-radius: 15px;
-            min-width: 80px;
-            border: 1px solid rgba(255,255,255,0.2);
+            padding: 1rem 1.2rem;
+            border-radius: 12px;
+            min-width: 70px;
+            border: 1px solid rgba(255,255,255,0.15);
         }
 
         .countdown-number {
             font-family: 'Cormorant Garamond', serif;
-            font-size: 2.5rem;
+            font-size: 2.2rem;
             font-weight: 600;
             display: block;
             line-height: 1;
         }
 
         .countdown-label {
-            font-size: 0.7rem;
+            font-size: 0.65rem;
             text-transform: uppercase;
             letter-spacing: 2px;
-            opacity: 0.8;
-            margin-top: 0.5rem;
+            opacity: 0.7;
+            margin-top: 0.4rem;
         }
 
         /* Scroll Indicator */
@@ -201,109 +392,115 @@
             bottom: 30px;
             left: 50%;
             transform: translateX(-50%);
-            animation: bounce 2s infinite;
+            animation: scrollBounce 2s infinite;
             cursor: pointer;
+            opacity: 0.7;
+            transition: opacity 0.3s;
+        }
+
+        .scroll-indicator:hover {
+            opacity: 1;
         }
 
         .scroll-indicator svg {
-            width: 30px;
-            height: 30px;
+            width: 28px;
+            height: 28px;
             fill: white;
-            opacity: 0.7;
         }
 
-        @keyframes bounce {
+        @keyframes scrollBounce {
             0%, 20%, 50%, 80%, 100% { transform: translateX(-50%) translateY(0); }
-            40% { transform: translateX(-50%) translateY(-10px); }
-            60% { transform: translateX(-50%) translateY(-5px); }
+            40% { transform: translateX(-50%) translateY(-8px); }
+            60% { transform: translateX(-50%) translateY(-4px); }
         }
 
         /* Info Section */
         .info-section {
             background: #fafafa;
-            padding: 6rem 2rem;
+            padding: 5rem 2rem;
         }
 
         .section-header {
             text-align: center;
-            margin-bottom: 4rem;
+            margin-bottom: 3.5rem;
         }
 
         .section-title {
             font-family: 'Great Vibes', cursive;
-            font-size: 3.5rem;
+            font-size: 3.2rem;
             color: #7b1fa2;
-            margin-bottom: 1rem;
+            margin-bottom: 0.8rem;
         }
 
         .section-subtitle {
             font-family: 'Cormorant Garamond', serif;
-            font-size: 1.2rem;
-            color: #666;
+            font-size: 1.1rem;
+            color: #888;
             letter-spacing: 3px;
             text-transform: uppercase;
         }
 
         .event-details {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-            gap: 2rem;
-            max-width: 1000px;
+            grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+            gap: 1.5rem;
+            max-width: 950px;
             margin: 0 auto;
         }
 
         .detail-card {
             background: white;
-            border-radius: 20px;
-            padding: 2.5rem 2rem;
+            border-radius: 16px;
+            padding: 2rem 1.5rem;
             text-align: center;
-            box-shadow: 0 10px 40px rgba(0,0,0,0.08);
+            box-shadow: 0 8px 30px rgba(0,0,0,0.06);
             transition: all 0.4s ease;
-            border: 1px solid rgba(156, 39, 176, 0.1);
+            border: 1px solid rgba(156, 39, 176, 0.08);
         }
 
         .detail-card:hover {
-            transform: translateY(-10px);
-            box-shadow: 0 20px 50px rgba(156, 39, 176, 0.15);
+            transform: translateY(-8px);
+            box-shadow: 0 16px 40px rgba(156, 39, 176, 0.12);
         }
 
         .detail-icon {
-            width: 70px;
-            height: 70px;
+            width: 65px;
+            height: 65px;
             background: linear-gradient(135deg, #9c27b0 0%, #7b1fa2 100%);
             border-radius: 50%;
             display: flex;
             align-items: center;
             justify-content: center;
-            margin: 0 auto 1.5rem;
-            font-size: 2rem;
+            margin: 0 auto 1.2rem;
+            font-size: 1.8rem;
         }
 
         .detail-title {
             font-family: 'Cormorant Garamond', serif;
-            font-size: 1.5rem;
+            font-size: 1.4rem;
             font-weight: 600;
             color: #333;
-            margin-bottom: 1rem;
+            margin-bottom: 0.8rem;
         }
 
         .detail-content {
             color: #666;
-            line-height: 1.8;
+            line-height: 1.7;
+            font-size: 0.95rem;
         }
 
         .detail-content strong {
             color: #7b1fa2;
-            font-size: 1.3rem;
+            font-size: 1.2rem;
             display: block;
-            margin-bottom: 0.5rem;
+            margin-bottom: 0.4rem;
         }
 
         /* Message Section */
         .message-section {
             background: linear-gradient(135deg, #673ab7 0%, #9c27b0 50%, #7b1fa2 100%);
             color: white;
-            padding: 6rem 2rem;
+            padding: 5rem 2rem;
             text-align: center;
             position: relative;
         }
@@ -311,16 +508,16 @@
         .message-section::before {
             content: '"';
             font-family: 'Great Vibes', cursive;
-            font-size: 15rem;
+            font-size: 12rem;
             position: absolute;
-            top: -2rem;
+            top: -1rem;
             left: 50%;
             transform: translateX(-50%);
-            opacity: 0.1;
+            opacity: 0.08;
         }
 
         .message-box {
-            max-width: 800px;
+            max-width: 750px;
             margin: 0 auto;
             position: relative;
             z-index: 1;
@@ -328,7 +525,7 @@
 
         .message-text {
             font-family: 'Cormorant Garamond', serif;
-            font-size: 1.6rem;
+            font-size: 1.5rem;
             line-height: 2;
             font-style: italic;
             font-weight: 300;
@@ -337,13 +534,13 @@
         .message-signature {
             margin-top: 2rem;
             font-family: 'Great Vibes', cursive;
-            font-size: 3rem;
+            font-size: 2.8rem;
         }
 
         /* CTA Section */
         .cta-section {
             background: white;
-            padding: 6rem 2rem;
+            padding: 5rem 2rem;
             text-align: center;
         }
 
@@ -351,55 +548,55 @@
             display: inline-flex;
             align-items: center;
             gap: 12px;
-            background: linear-gradient(135deg, #9c27b0 0%, #7b1fa2 100%);
+            background: linear-gradient(135deg, #25d366 0%, #128c7e 100%);
             color: white;
-            padding: 1.2rem 3rem;
+            padding: 1.1rem 2.5rem;
             border-radius: 50px;
             text-decoration: none;
-            font-size: 1.1rem;
+            font-size: 1rem;
             font-weight: 500;
             letter-spacing: 1px;
             transition: all 0.4s ease;
-            box-shadow: 0 10px 30px rgba(156, 39, 176, 0.3);
+            box-shadow: 0 8px 25px rgba(37, 211, 102, 0.3);
         }
 
         .cta-button:hover {
             transform: translateY(-3px);
-            box-shadow: 0 15px 40px rgba(156, 39, 176, 0.4);
+            box-shadow: 0 12px 35px rgba(37, 211, 102, 0.4);
         }
 
         .cta-button svg {
-            width: 24px;
-            height: 24px;
+            width: 22px;
+            height: 22px;
             fill: currentColor;
         }
 
         .cta-note {
-            margin-top: 2rem;
+            margin-top: 1.5rem;
             color: #999;
-            font-size: 0.95rem;
+            font-size: 0.9rem;
         }
 
         /* Gallery Section */
         .gallery-section {
             background: linear-gradient(135deg, #f3e5f5 0%, #fce4ec 100%);
-            padding: 6rem 2rem;
+            padding: 5rem 2rem;
             text-align: center;
         }
 
         .gallery-placeholder {
-            max-width: 600px;
+            max-width: 550px;
             margin: 0 auto;
-            padding: 4rem 2rem;
+            padding: 3rem 2rem;
             background: white;
-            border-radius: 20px;
-            box-shadow: 0 10px 40px rgba(0,0,0,0.05);
+            border-radius: 16px;
+            box-shadow: 0 8px 30px rgba(0,0,0,0.05);
         }
 
         .gallery-placeholder p {
             color: #666;
-            font-size: 1.1rem;
-            line-height: 1.8;
+            font-size: 1rem;
+            line-height: 1.7;
         }
 
         /* Footer */
@@ -407,235 +604,307 @@
             background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
             color: white;
             text-align: center;
-            padding: 3rem 2rem;
+            padding: 2.5rem 2rem;
         }
 
         .footer-brand {
-            font-size: 1.3rem;
+            font-size: 1.2rem;
             font-weight: 600;
-            margin-bottom: 0.5rem;
+            margin-bottom: 0.4rem;
         }
 
         .footer-tagline {
-            opacity: 0.8;
-            margin-bottom: 1rem;
+            opacity: 0.7;
+            font-size: 0.9rem;
+            margin-bottom: 0.8rem;
         }
 
         .footer-contact {
-            opacity: 0.7;
-            font-size: 0.9rem;
+            opacity: 0.6;
+            font-size: 0.85rem;
         }
 
         .footer-credit {
-            margin-top: 2rem;
-            padding-top: 2rem;
+            margin-top: 1.5rem;
+            padding-top: 1.5rem;
             border-top: 1px solid rgba(255,255,255,0.1);
-            font-size: 0.85rem;
-            opacity: 0.5;
+            font-size: 0.8rem;
+            opacity: 0.4;
         }
 
         /* Animations */
         @keyframes fadeInDown {
-            from { opacity: 0; transform: translateY(-30px); }
+            from { opacity: 0; transform: translateY(-25px); }
             to { opacity: 1; transform: translateY(0); }
         }
 
         @keyframes fadeInUp {
-            from { opacity: 0; transform: translateY(30px); }
+            from { opacity: 0; transform: translateY(25px); }
             to { opacity: 1; transform: translateY(0); }
         }
 
         /* Responsive */
         @media (max-width: 768px) {
+            .cover-title {
+                font-size: 3rem;
+            }
+
+            .cover-subtitle {
+                font-size: 1.2rem;
+            }
+
             .hero-title {
-                font-size: 3.5rem;
+                font-size: 3.2rem;
             }
 
             .hero-date {
-                font-size: 1.8rem;
+                font-size: 1.6rem;
             }
 
             .countdown {
-                gap: 0.8rem;
+                gap: 0.6rem;
             }
 
             .countdown-item {
-                padding: 1rem;
-                min-width: 65px;
+                padding: 0.8rem;
+                min-width: 60px;
             }
 
             .countdown-number {
-                font-size: 1.8rem;
+                font-size: 1.6rem;
             }
 
             .section-title {
-                font-size: 2.5rem;
+                font-size: 2.4rem;
             }
 
             .message-text {
-                font-size: 1.3rem;
+                font-size: 1.2rem;
             }
 
             .music-btn {
-                width: 50px;
-                height: 50px;
+                width: 48px;
+                height: 48px;
                 bottom: 20px;
                 right: 20px;
             }
 
             .music-btn svg {
-                width: 20px;
-                height: 20px;
+                width: 18px;
+                height: 18px;
             }
         }
     </style>
 </head>
 <body>
     <!-- Background Music -->
-    <audio id="bgMusic" loop>
+    <audio id="bgMusic" loop preload="auto">
         <source src="Estefany, Quinceañera.mp3" type="audio/mpeg">
     </audio>
 
-    <!-- Music Control Button -->
-    <button class="music-btn" id="musicBtn" onclick="toggleMusic()" aria-label="Controlar música">
-        <svg id="playIcon" viewBox="0 0 24 24">
-            <path d="M8 5v14l11-7z"/>
-        </svg>
-        <svg id="pauseIcon" style="display:none" viewBox="0 0 24 24">
-            <path d="M6 19h4V5H6v14zm8-14v14h4V5h-4z"/>
-        </svg>
-    </button>
+    <!-- ==================== COVER PAGE ==================== -->
+    <div class="cover-page" id="coverPage" onclick="openInvitation()">
+        <div class="particles" id="particles"></div>
 
-    <!-- Hero Section -->
-    <section class="hero" id="inicio">
-        <div class="hero-content">
-            <p class="hero-label">Mis XV Años</p>
-            <h1 class="hero-title">Estefany Esmeralda</h1>
-            <div class="decorative-line"></div>
-            <p class="hero-date">2 de Mayo, 2026</p>
-            <p class="hero-location">León, Guanajuato</p>
+        <div class="cover-content">
+            <div class="cover-ornament">&#10022; &#10022; &#10022;</div>
+            <p class="cover-label">Mis XV Años</p>
+            <h1 class="cover-title">Estefany Esmeralda</h1>
+            <p class="cover-subtitle">Te invita a celebrar</p>
+            <p class="cover-date">2 de Mayo, 2026</p>
 
-            <div class="countdown" id="countdown">
-                <div class="countdown-item">
-                    <span class="countdown-number" id="days">--</span>
-                    <span class="countdown-label">Días</span>
-                </div>
-                <div class="countdown-item">
-                    <span class="countdown-number" id="hours">--</span>
-                    <span class="countdown-label">Horas</span>
-                </div>
-                <div class="countdown-item">
-                    <span class="countdown-number" id="minutes">--</span>
-                    <span class="countdown-label">Min</span>
-                </div>
-                <div class="countdown-item">
-                    <span class="countdown-number" id="seconds">--</span>
-                    <span class="countdown-label">Seg</span>
-                </div>
-            </div>
+            <button class="cover-button">
+                <span>Abrir Invitación</span>
+                <svg viewBox="0 0 24 24"><path d="M19 13h-6v6h-2v-6H5v-2h6V5h2v6h6v2z"/></svg>
+            </button>
         </div>
 
-        <a href="#detalles" class="scroll-indicator">
-            <svg viewBox="0 0 24 24">
-                <path d="M7.41 8.59L12 13.17l4.59-4.58L18 10l-6 6-6-6 1.41-1.41z"/>
+        <p class="cover-hint">Toca para abrir</p>
+    </div>
+
+    <!-- ==================== MAIN INVITATION ==================== -->
+    <div class="invitation" id="invitation">
+        <!-- Music Control Button -->
+        <button class="music-btn" id="musicBtn" onclick="toggleMusic(event)" aria-label="Controlar música">
+            <svg id="playIcon" style="display:none" viewBox="0 0 24 24">
+                <path d="M8 5v14l11-7z"/>
             </svg>
-        </a>
-    </section>
+            <svg id="pauseIcon" viewBox="0 0 24 24">
+                <path d="M6 19h4V5H6v14zm8-14v14h4V5h-4z"/>
+            </svg>
+        </button>
 
-    <!-- Details Section -->
-    <section class="info-section" id="detalles">
-        <div class="section-header">
-            <h2 class="section-title">Detalles del Evento</h2>
-            <p class="section-subtitle">Te esperamos</p>
-        </div>
+        <!-- Hero Section -->
+        <section class="hero" id="inicio">
+            <div class="hero-content">
+                <div class="hero-ornament">&#10022;</div>
+                <p class="hero-label">Mis XV Años</p>
+                <h1 class="hero-title">Estefany Esmeralda</h1>
+                <div class="decorative-line"></div>
+                <p class="hero-date">2 de Mayo, 2026</p>
+                <p class="hero-location">León, Guanajuato</p>
 
-        <div class="event-details">
-            <div class="detail-card">
-                <div class="detail-icon">⛪</div>
-                <h3 class="detail-title">Ceremonia Religiosa</h3>
-                <div class="detail-content">
-                    <strong>5:00 PM</strong>
-                    <p>Por confirmar</p>
-                    <p>León, Guanajuato</p>
+                <div class="countdown" id="countdown">
+                    <div class="countdown-item">
+                        <span class="countdown-number" id="days">--</span>
+                        <span class="countdown-label">Días</span>
+                    </div>
+                    <div class="countdown-item">
+                        <span class="countdown-number" id="hours">--</span>
+                        <span class="countdown-label">Horas</span>
+                    </div>
+                    <div class="countdown-item">
+                        <span class="countdown-number" id="minutes">--</span>
+                        <span class="countdown-label">Min</span>
+                    </div>
+                    <div class="countdown-item">
+                        <span class="countdown-number" id="seconds">--</span>
+                        <span class="countdown-label">Seg</span>
+                    </div>
                 </div>
             </div>
 
-            <div class="detail-card">
-                <div class="detail-icon">🎉</div>
-                <h3 class="detail-title">Recepción</h3>
-                <div class="detail-content">
-                    <strong>7:00 PM</strong>
-                    <p>Por confirmar</p>
-                    <p>León, Guanajuato</p>
-                </div>
+            <a href="#detalles" class="scroll-indicator">
+                <svg viewBox="0 0 24 24">
+                    <path d="M7.41 8.59L12 13.17l4.59-4.58L18 10l-6 6-6-6 1.41-1.41z"/>
+                </svg>
+            </a>
+        </section>
+
+        <!-- Details Section -->
+        <section class="info-section" id="detalles">
+            <div class="section-header">
+                <h2 class="section-title">Detalles del Evento</h2>
+                <p class="section-subtitle">Te esperamos</p>
             </div>
 
-            <div class="detail-card">
-                <div class="detail-icon">👗</div>
-                <h3 class="detail-title">Código de Vestimenta</h3>
-                <div class="detail-content">
-                    <strong>Formal</strong>
-                    <p>Elegante</p>
+            <div class="event-details">
+                <div class="detail-card">
+                    <div class="detail-icon">⛪</div>
+                    <h3 class="detail-title">Ceremonia Religiosa</h3>
+                    <div class="detail-content">
+                        <strong>5:00 PM</strong>
+                        <p>Por confirmar</p>
+                        <p>León, Guanajuato</p>
+                    </div>
+                </div>
+
+                <div class="detail-card">
+                    <div class="detail-icon">🎉</div>
+                    <h3 class="detail-title">Recepción</h3>
+                    <div class="detail-content">
+                        <strong>7:00 PM</strong>
+                        <p>Por confirmar</p>
+                        <p>León, Guanajuato</p>
+                    </div>
+                </div>
+
+                <div class="detail-card">
+                    <div class="detail-icon">👗</div>
+                    <h3 class="detail-title">Código de Vestimenta</h3>
+                    <div class="detail-content">
+                        <strong>Formal</strong>
+                        <p>Elegante</p>
+                    </div>
                 </div>
             </div>
-        </div>
-    </section>
+        </section>
 
-    <!-- Message Section -->
-    <section class="message-section">
-        <div class="message-box">
-            <p class="message-text">
-                Hoy comienzo a escribir una nueva página de mi vida, y quiero que seas parte de este momento tan especial. Tu presencia hará que este día sea inolvidable.
-            </p>
-            <p class="message-signature">- Estefany</p>
-        </div>
-    </section>
+        <!-- Message Section -->
+        <section class="message-section">
+            <div class="message-box">
+                <p class="message-text">
+                    Hoy comienzo a escribir una nueva página de mi vida, y quiero que seas parte de este momento tan especial. Tu presencia hará que este día sea inolvidable.
+                </p>
+                <p class="message-signature">- Estefany</p>
+            </div>
+        </section>
 
-    <!-- CTA Section -->
-    <section class="cta-section">
-        <div class="section-header">
-            <h2 class="section-title">Confirma tu Asistencia</h2>
-            <p class="section-subtitle">Antes del 25 de abril de 2026</p>
-        </div>
+        <!-- CTA Section -->
+        <section class="cta-section">
+            <div class="section-header">
+                <h2 class="section-title">Confirma tu Asistencia</h2>
+                <p class="section-subtitle">Antes del 25 de abril de 2026</p>
+            </div>
 
-        <a href="https://wa.me/5214773359100?text=Hola,%20confirmo%20mi%20asistencia%20a%20los%20XV%20años%20de%20Estefany" class="cta-button">
-            <svg viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
-            Confirmar por WhatsApp
-        </a>
+            <a href="https://wa.me/5214773359100?text=Hola,%20confirmo%20mi%20asistencia%20a%20los%20XV%20años%20de%20Estefany" class="cta-button">
+                <svg viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+                Confirmar por WhatsApp
+            </a>
 
-        <p class="cta-note">Ana Silvia Herrera Solano</p>
-    </section>
+            <p class="cta-note">Ana Silvia Herrera Solano</p>
+        </section>
 
-    <!-- Gallery Section -->
-    <section class="gallery-section">
-        <div class="section-header">
-            <h2 class="section-title">Galería de Fotos</h2>
-            <p class="section-subtitle">Momentos especiales</p>
-        </div>
+        <!-- Gallery Section -->
+        <section class="gallery-section">
+            <div class="section-header">
+                <h2 class="section-title">Galería de Fotos</h2>
+                <p class="section-subtitle">Momentos especiales</p>
+            </div>
 
-        <div class="gallery-placeholder">
-            <p>Las fotos de la sesión previa se mostrarán aquí próximamente.</p>
-            <p style="margin-top: 1rem; color: #999; font-size: 0.9rem;">(Pendiente de sesión fotográfica)</p>
-        </div>
-    </section>
+            <div class="gallery-placeholder">
+                <p>Las fotos de la sesión previa se mostrarán aquí próximamente.</p>
+                <p style="margin-top: 1rem; color: #999; font-size: 0.85rem;">(Pendiente de sesión fotográfica)</p>
+            </div>
+        </section>
 
-    <!-- Footer -->
-    <footer class="footer">
-        <p class="footer-brand">Producciones Foro 7</p>
-        <p class="footer-tagline">Fotografía, Video e Invitaciones Web</p>
-        <p class="footer-contact">WhatsApp: 477-920-3776 | foro7producciones@gmail.com</p>
-        <p class="footer-credit">Invitación digital creada con amor por Foro 7</p>
-    </footer>
+        <!-- Footer -->
+        <footer class="footer">
+            <p class="footer-brand">Producciones Foro 7</p>
+            <p class="footer-tagline">Fotografía, Video e Invitaciones Web</p>
+            <p class="footer-contact">WhatsApp: 477-920-3776 | foro7producciones@gmail.com</p>
+            <p class="footer-credit">Invitación digital creada con amor por Foro 7</p>
+        </footer>
+    </div>
 
     <script>
-        // Music Control
+        // Create floating particles
+        const particlesContainer = document.getElementById('particles');
+        for (let i = 0; i < 20; i++) {
+            const particle = document.createElement('div');
+            particle.className = 'particle';
+            particle.style.left = Math.random() * 100 + '%';
+            particle.style.animationDelay = Math.random() * 15 + 's';
+            particle.style.animationDuration = (15 + Math.random() * 10) + 's';
+            particlesContainer.appendChild(particle);
+        }
+
+        // Audio and UI elements
         const audio = document.getElementById('bgMusic');
         const musicBtn = document.getElementById('musicBtn');
         const playIcon = document.getElementById('playIcon');
         const pauseIcon = document.getElementById('pauseIcon');
+        const coverPage = document.getElementById('coverPage');
+        const invitation = document.getElementById('invitation');
         let isPlaying = false;
 
-        function toggleMusic() {
+        // Open invitation and play music
+        function openInvitation() {
+            // Hide cover
+            coverPage.classList.add('hidden');
+
+            // Show invitation
+            setTimeout(() => {
+                invitation.classList.add('visible');
+                musicBtn.classList.add('visible');
+            }, 300);
+
+            // Play music
+            audio.play().then(() => {
+                isPlaying = true;
+                playIcon.style.display = 'none';
+                pauseIcon.style.display = 'block';
+                musicBtn.classList.add('playing');
+            }).catch(e => {
+                console.log('Autoplay prevented:', e);
+                playIcon.style.display = 'block';
+                pauseIcon.style.display = 'none';
+            });
+        }
+
+        // Toggle music
+        function toggleMusic(e) {
+            e.stopPropagation();
             if (isPlaying) {
                 audio.pause();
                 playIcon.style.display = 'block';
@@ -672,7 +941,7 @@
         updateCountdown();
         setInterval(updateCountdown, 1000);
 
-        // Intersection Observer for animations
+        // Intersection Observer for scroll animations
         const observerOptions = {
             threshold: 0.1,
             rootMargin: '0px 0px -50px 0px'
@@ -689,7 +958,7 @@
 
         document.querySelectorAll('.detail-card, .section-header').forEach(el => {
             el.style.opacity = '0';
-            el.style.transform = 'translateY(30px)';
+            el.style.transform = 'translateY(25px)';
             el.style.transition = 'all 0.6s ease';
             observer.observe(el);
         });
