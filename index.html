@@ -799,25 +799,35 @@
             text-align: center;
         }
 
-        .gallery-placeholder {
-            max-width: 500px;
-            margin: 0 auto;
-            padding: 3rem 2rem;
-            background: white;
-            border-radius: 20px;
-            box-shadow: 0 10px 40px rgba(0,0,0,0.05);
+        .gallery-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 6px;
+            max-width: 600px;
+            margin: 0 auto 2rem;
+            border-radius: 12px;
+            overflow: hidden;
         }
-
-        .gallery-icon {
-            font-size: 3rem;
-            margin-bottom: 1rem;
-            opacity: 0.5;
+        .gallery-grid img {
+            width: 100%; aspect-ratio: 1;
+            object-fit: cover;
+            transition: transform 0.4s ease;
         }
-
-        .gallery-placeholder p {
-            color: #666;
-            font-size: 1rem;
-            line-height: 1.8;
+        .gallery-grid img:hover { transform: scale(1.05); }
+        .gallery-link {
+            display: inline-block;
+            padding: 0.9rem 2.5rem;
+            background: linear-gradient(135deg, var(--primary-pink), var(--primary-purple));
+            color: white;
+            text-decoration: none;
+            border-radius: 30px;
+            font-size: 0.85rem; font-weight: 600;
+            transition: all 0.3s;
+        }
+        .gallery-link:hover { transform: translateY(-3px); box-shadow: 0 8px 25px rgba(233,30,99,0.3); }
+        .gallery-count {
+            color: #666; font-size: 0.95rem;
+            margin-bottom: 1.5rem;
         }
 
         /* Footer */
@@ -1093,10 +1103,16 @@
                 <p class="section-subtitle">Momentos especiales</p>
             </div>
 
-            <div class="gallery-placeholder">
-                <div class="gallery-icon">🖼️</div>
-                <p>Las fotos de la sesión previa se mostrarán aquí próximamente.</p>
+            <div class="gallery-grid">
+                <img src="images/1.webp" alt="Sesión" loading="lazy">
+                <img src="images/3.webp" alt="Sesión" loading="lazy">
+                <img src="images/4.webp" alt="Sesión" loading="lazy">
+                <img src="images/6.webp" alt="Sesión" loading="lazy">
+                <img src="images/7.webp" alt="Sesión" loading="lazy">
+                <img src="images/8.webp" alt="Sesión" loading="lazy">
             </div>
+            <p class="gallery-count">129 fotografías de la sesión</p>
+            <a href="selector.html" class="gallery-link">Ver todas las fotos</a>
         </section>
 
         <!-- RSVP -->
