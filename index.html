@@ -801,33 +801,33 @@
 
         .gallery-grid {
             display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 6px;
+            grid-template-columns: 1fr 1fr;
+            gap: 8px;
             max-width: 600px;
             margin: 0 auto 2rem;
             border-radius: 12px;
             overflow: hidden;
         }
         .gallery-grid img {
-            width: 100%; aspect-ratio: 1;
-            object-fit: cover;
+            width: 100%;
+            height: auto;
+            display: block;
+            border-radius: 8px;
             transition: transform 0.4s ease;
         }
-        .gallery-grid img:hover { transform: scale(1.05); }
-        .gallery-link {
-            display: inline-block;
-            padding: 0.9rem 2.5rem;
-            background: linear-gradient(135deg, var(--primary-pink), var(--primary-purple));
-            color: white;
-            text-decoration: none;
-            border-radius: 30px;
-            font-size: 0.85rem; font-weight: 600;
-            transition: all 0.3s;
-        }
-        .gallery-link:hover { transform: translateY(-3px); box-shadow: 0 8px 25px rgba(233,30,99,0.3); }
+        .gallery-grid img:hover { transform: scale(1.03); }
         .gallery-count {
             color: #666; font-size: 0.95rem;
             margin-bottom: 1.5rem;
+        }
+        .section-photo {
+            width: 100%;
+            max-width: 500px;
+            height: auto;
+            display: block;
+            margin: 2rem auto;
+            border-radius: 12px;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.15);
         }
 
         /* Footer */
@@ -1043,6 +1043,9 @@
             </a>
         </section>
 
+        <!-- Photo between hero and details -->
+        <img src="images/1.webp" alt="Estefany" class="section-photo" loading="lazy">
+
         <!-- Details Section -->
         <section class="info-section" id="detalles">
             <div class="section-header">
@@ -1085,6 +1088,9 @@
             </div>
         </section>
 
+        <!-- Photo before message -->
+        <img src="images/3.webp" alt="Estefany" class="section-photo" loading="lazy">
+
         <!-- Message Section -->
         <section class="message-section">
             <div class="message-box">
@@ -1104,14 +1110,11 @@
             </div>
 
             <div class="gallery-grid">
-                <img src="images/1.webp" alt="Sesión" loading="lazy">
-                <img src="images/3.webp" alt="Sesión" loading="lazy">
                 <img src="images/4.webp" alt="Sesión" loading="lazy">
                 <img src="images/6.webp" alt="Sesión" loading="lazy">
                 <img src="images/7.webp" alt="Sesión" loading="lazy">
                 <img src="images/8.webp" alt="Sesión" loading="lazy">
             </div>
-            <p class="gallery-count">Sesión fotográfica</p>
         </section>
 
         <!-- RSVP -->
