@@ -786,6 +786,7 @@
         try { var _saved = localStorage.getItem(STORAGE_KEY); if (_saved) selections = JSON.parse(_saved); } catch(e) {}
         // La selección confirmada tiene prioridad sobre una copia local anterior.
         if (typeof defaultSelections !== 'undefined') selections = Object.assign(selections, defaultSelections);
+        delete selections._sync;
         function saveSelections() { try { localStorage.setItem(STORAGE_KEY, JSON.stringify(selections)); } catch(e) {} }
         saveSelections();
         let activeFilter = 'all';
@@ -814,7 +815,7 @@
                 if ((selections[photo.name]?.categories || []).length) card.classList.add('is-selected');
                 card.onclick = () => openModal(index);
 
-                const badges = selections[photo.name]?.categories.map(cat =>
+                const badges = (selections[photo.name]?.categories || []).map(cat =>
                     `<span class="badge ${cat}">${getCategoryLabel(cat)}</span>`
                 ).join('') || '';
 
@@ -878,6 +879,7 @@
 
             // Cargar selecciones actuales
             const photoSelections = selections[photo.name] || { categories: [], notes: '' };
+            if (!Array.isArray(photoSelections.categories)) photoSelections.categories = [];
 
             // Actualizar botones
             document.querySelectorAll('.option-btn').forEach(btn => {
@@ -917,6 +919,7 @@
                 if (!selections[photo.name]) {
                     selections[photo.name] = { categories: [], notes: '' };
                 }
+                if (!Array.isArray(selections[photo.name].categories)) selections[photo.name].categories = [];
 
                 const categories = selections[photo.name].categories;
                 const index = categories.indexOf(option);
@@ -957,7 +960,7 @@
             };
 
             Object.values(selections).forEach(selection => {
-                selection.categories.forEach(cat => {
+                (Array.isArray(selection?.categories) ? selection.categories : []).forEach(cat => {
                     if (counts[cat] !== undefined) {
                         counts[cat]++;
                     }

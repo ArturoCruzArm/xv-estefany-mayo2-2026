@@ -77,7 +77,9 @@
             var sb = {};
             rows.forEach(function(row) {
                 if (row.datos && typeof row.datos === 'object') {
-                    Object.assign(sb, row.datos);
+                    Object.entries(row.datos).forEach(function(e) {
+                        if (e[0].charAt(0) !== '_') sb[e[0]] = e[1];
+                    });
                 }
             });
 
@@ -90,7 +92,7 @@
                 merged = Object.assign({}, sb);
                 Object.entries(local).forEach(function(e) {
                     var s = e[1];
-                    if (s && ((s.categories && s.categories.length) || s.notes)) merged[e[0]] = s;
+                    if (e[0].charAt(0) !== '_' && s && ((s.categories && s.categories.length) || s.notes)) merged[e[0]] = s;
                 });
             }
 
