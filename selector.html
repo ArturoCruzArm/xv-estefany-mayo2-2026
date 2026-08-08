@@ -213,6 +213,11 @@
             border-color: var(--accent-light);
         }
 
+        .photo-card.is-selected {
+            border-color: var(--accent-white);
+            box-shadow: 0 0 0 2px rgba(255,255,255,.22), 0 8px 24px rgba(42,18,72,.42);
+        }
+
         .photo-card img {
             width: 100%;
             height: 350px;
@@ -220,6 +225,33 @@
             display: block;
             pointer-events: none;
         }
+
+        .pagination {
+            display: flex;
+            flex-wrap: wrap;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            margin: 30px auto 0;
+        }
+
+        .pagination button {
+            min-width: 42px;
+            min-height: 42px;
+            padding: 8px 12px;
+            cursor: pointer;
+            border: 1px solid rgba(255,255,255,.45);
+            border-radius: 8px;
+            background: rgba(255,255,255,.1);
+            color: #fff;
+            font: inherit;
+            font-weight: 700;
+        }
+
+        .pagination button.active { background: #fff; color: var(--primary-dark); }
+        .pagination button:disabled { cursor: default; opacity: .35; }
+        .pagination span { flex-basis: 100%; margin-top: 6px; text-align: center; font-size: .82rem; opacity: .82; }
+        .empty-filter { grid-column: 1 / -1; padding: 50px 20px; text-align: center; }
 
         .photo-number {
             position: absolute;
@@ -651,6 +683,7 @@
             <div class="photos-grid" id="photosGrid">
                 <!-- Photos will be loaded here dynamically -->
             </div>
+            <nav class="pagination" id="pagination" aria-label="Páginas de fotografías"></nav>
         </section>
     </div>
 
@@ -718,6 +751,8 @@
         <p>León, Guanajuato</p>
     </footer>
 
+    <script src="photos_list.js?v=3"></script>
+    <script src="default_selections.js?v=2"></script>
     <script>
         // Deshabilitar clic derecho en todo el sitio
         document.addEventListener('contextmenu', function(e) {
@@ -745,12 +780,17 @@
         // photos se carga desde photos_list.js
         let currentPhotoIndex = 0;
         // Cargar selecciones predeterminadas
-        let selections = typeof defaultSelections !== 'undefined' ? {...defaultSelections} : {};
+        let selections = {};
         const STORAGE_KEY = 'xv_estefany_mayo2';
         // Cargar desde localStorage
-        try { var _saved = localStorage.getItem(STORAGE_KEY); if (_saved) selections = Object.assign(selections, JSON.parse(_saved)); } catch(e) {}
+        try { var _saved = localStorage.getItem(STORAGE_KEY); if (_saved) selections = JSON.parse(_saved); } catch(e) {}
+        // La selección confirmada tiene prioridad sobre una copia local anterior.
+        if (typeof defaultSelections !== 'undefined') selections = Object.assign(selections, defaultSelections);
         function saveSelections() { try { localStorage.setItem(STORAGE_KEY, JSON.stringify(selections)); } catch(e) {} }
+        saveSelections();
         let activeFilter = 'all';
+        let currentPage = 1;
+        const PHOTOS_PER_PAGE = 24;
 
         // Las fotos se cargan automáticamente desde photos_list.js
         console.log(`Selecciones predeterminadas cargadas: ${Object.keys(selections).length} fotos`);
@@ -760,27 +800,71 @@
             const grid = document.getElementById('photosGrid');
             grid.innerHTML = '';
 
-            photos.forEach((photo, index) => {
-                if (activeFilter !== 'all' && (!selections[photo.name] || !selections[photo.name].categories.includes(activeFilter))) {
-                    return;
-                }
+            const filtered = photos.map((photo, index) => ({ photo, index })).filter(item =>
+                activeFilter === 'all' || (selections[item.photo.name]?.categories || []).includes(activeFilter)
+            );
+            const totalPages = Math.max(1, Math.ceil(filtered.length / PHOTOS_PER_PAGE));
+            currentPage = Math.min(currentPage, totalPages);
+            const start = (currentPage - 1) * PHOTOS_PER_PAGE;
+
+            filtered.slice(start, start + PHOTOS_PER_PAGE).forEach(({ photo, index }) => {
 
                 const card = document.createElement('div');
                 card.className = 'photo-card';
+                if ((selections[photo.name]?.categories || []).length) card.classList.add('is-selected');
                 card.onclick = () => openModal(index);
 
                 const badges = selections[photo.name]?.categories.map(cat =>
                     `<span class="badge ${cat}">${getCategoryLabel(cat)}</span>`
                 ).join('') || '';
 
+                const thumbnail = photo.path.replace('images/', 'images/thumb/');
                 card.innerHTML = `
-                    <img src="${photo.path}" alt="Foto ${index + 1}" loading="lazy">
+                    <img src="${thumbnail}" data-full-src="${photo.path}" alt="Foto ${index + 1}" loading="lazy" decoding="async" onerror="this.onerror=null;this.src=this.dataset.fullSrc">
                     <div class="photo-number">#${String(index + 1).padStart(3, '0')}</div>
                     <div class="photo-badges">${badges}</div>
                 `;
 
                 grid.appendChild(card);
             });
+
+            if (!filtered.length) {
+                grid.innerHTML = '<p class="empty-filter">No hay fotografías en esta categoría.</p>';
+            }
+            renderPagination(totalPages, filtered.length);
+        }
+
+        function renderPagination(totalPages, totalPhotos) {
+            const pagination = document.getElementById('pagination');
+            pagination.innerHTML = '';
+            if (totalPages <= 1) return;
+
+            const addButton = (label, page, disabled, current) => {
+                const button = document.createElement('button');
+                button.type = 'button';
+                button.textContent = label;
+                button.disabled = disabled;
+                if (current) button.classList.add('active');
+                button.setAttribute('aria-label', label === '‹' ? 'Página anterior' : label === '›' ? 'Página siguiente' : `Página ${page}`);
+                button.addEventListener('click', () => {
+                    currentPage = page;
+                    renderGallery();
+                    document.getElementById('photosGrid').scrollIntoView({ behavior: 'smooth', block: 'start' });
+                });
+                pagination.appendChild(button);
+            };
+
+            addButton('‹', Math.max(1, currentPage - 1), currentPage === 1, false);
+            const from = Math.max(1, currentPage - 2);
+            const to = Math.min(totalPages, from + 4);
+            for (let page = Math.max(1, to - 4); page <= to; page += 1) {
+                addButton(String(page), page, false, page === currentPage);
+            }
+            addButton('›', Math.min(totalPages, currentPage + 1), currentPage === totalPages, false);
+
+            const summary = document.createElement('span');
+            summary.textContent = `${totalPhotos} fotos · Página ${currentPage} de ${totalPages}`;
+            pagination.appendChild(summary);
         }
 
         // Abrir modal
@@ -893,6 +977,7 @@
                 document.querySelectorAll('.btn-filter').forEach(b => b.classList.remove('active'));
                 this.classList.add('active');
                 activeFilter = this.dataset.filter;
+                currentPage = 1;
                 renderGallery();
             });
         });
@@ -1007,11 +1092,8 @@
 
     </script>
 
-    <!-- Lista de fotos -->
-    <script src="photos_list.js?v=2"></script>
-    <script src="default_selections.js?v=1"></script>
     <script src="js/visitas.js?v=1"></script>
-<script src="js/selector-sb-inline.js?v=1"></script>
+<script src="js/selector-sb-inline.js?v=3"></script>
 <script src="js/foro7-footer.js?v=1"></script>
 </body>
 </html>

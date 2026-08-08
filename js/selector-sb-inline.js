@@ -97,6 +97,7 @@
             _syncing = true;
             try {
                 localStorage.setItem(SB_KEY, JSON.stringify(merged));
+                if (typeof selections !== 'undefined') selections = merged;
                 if (typeof renderGallery === 'function') renderGallery();
             } finally { _syncing = false; }
 
