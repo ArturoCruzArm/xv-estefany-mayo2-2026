@@ -99,6 +99,7 @@
                 localStorage.setItem(SB_KEY, JSON.stringify(merged));
                 if (typeof selections !== 'undefined') selections = merged;
                 if (typeof renderGallery === 'function') renderGallery();
+                if (typeof updateStats === 'function') updateStats();
             } finally { _syncing = false; }
 
             if (!isPoll) {
